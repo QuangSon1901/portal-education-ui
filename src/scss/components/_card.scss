@@ -1,0 +1,44 @@
+.card {
+    background-color: var(--bg-main);
+    border-radius: 1.6rem;
+    padding: 1.4rem;
+
+    & p {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    &.solid {
+        background-color: transparent;
+        border: 1px solid var(--bg-third);
+    }
+
+    &__header {
+        margin-bottom: 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    &.solid &__header {
+        font-size: 0.8rem;
+        color: var(--color-primary);
+    }
+
+    &__content {
+        display: grid;
+        grid-template-columns: 11.6rem repeat(1, 1fr);
+        gap: 1.4rem;
+        font-size: 1.2rem;
+        line-height: 2.2rem;
+        color: var(--txt-color);
+
+        &.grid-1 {
+            grid-template-columns: repeat(1, 1fr);
+        }
+
+        &.grid-2 {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+}

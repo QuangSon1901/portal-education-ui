@@ -1,0 +1,115 @@
+.profile {
+    &__body {
+        padding-top: 2rem;
+        padding-bottom: 5rem;
+
+        &__info {
+            display: grid;
+            grid-template-columns: 22rem 1fr;
+            gap: 1.4rem;
+            color: var(--txt-color);
+            margin-bottom: 3rem;
+
+            @include tablet {
+                grid-template-columns: 1fr;
+            }
+
+            &__student {
+                text-align: center;
+                padding: 0 20px;
+
+                & > img {
+                    width: 12rem;
+                    height: 12rem;
+                    border-radius: 50%;
+                    object-fit: cover;
+                    margin-bottom: 1rem;
+                }
+
+                & > div {
+                    line-height: 3rem;
+                }
+            }
+
+            &__learning {
+                &__header {
+                    width: 100%;
+                    font-size: 1.8rem;
+                    font-weight: 700;
+                    padding-bottom: 1rem;
+                    border-bottom: 1px solid var(--bg-third);
+                }
+
+                &__content {
+                    margin-top: 1rem;
+                    display: grid;
+                    grid-template-columns: repeat(2, 1fr);
+                    gap: 1.4rem;
+                    line-height: 3rem;
+
+                    @include mobile {
+                        grid-template-columns: 1fr;
+                    }
+                }
+            }
+        }
+
+        &__nav-tab {
+            width: 100%;
+            overflow: hidden;
+            &__choose {
+                @include flex(center, flex-start);
+                margin: 0;
+                & > div {
+                    user-select: none;
+                    cursor: pointer;
+                    padding: 1rem 1.6rem;
+                    font-size: 1.4rem;
+                    border-bottom: 1px solid var(--bg-third);
+
+                    &.active {
+                        color: var(--color-primary);
+                        font-weight: 600;
+                        border: 1px solid var(--bg-third);
+                        border-bottom-color: transparent;
+                    }
+
+                    &:last-child {
+                        border: 0;
+                        flex: 1;
+                        padding: 0;
+                        padding-top: 4.3rem;
+                        border-bottom: 1px solid var(--bg-third);
+                    }
+
+                    &:first-child {
+                        border-left-color: transparent;
+                    }
+                }
+            }
+
+            &__content {
+                &__text {
+                    display: grid;
+                    grid-template-columns: repeat(4, 1fr);
+                    gap: 1.4rem;
+                    line-height: 3rem;
+                    padding: 1.2rem 2rem;
+
+                    @include tablet {
+                        grid-template-columns: repeat(2, 1fr);
+                    }
+
+                    @include mobile {
+                        grid-template-columns: repeat(1, 1fr);
+                    }
+                }
+
+                &__table {
+                    padding: 1.2rem 2rem;
+                    overflow-x: overlay;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,138 @@
+@import 'normalize.css';
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 62.5%;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    overflow-x: hidden;
+    overflow-y: overlay;
+}
+
+a {
+    user-select: none;
+    text-decoration: none;
+    color: unset;
+    display: inline-block;
+}
+
+button {
+    user-select: none;
+    outline: 0;
+    border: 0;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+ul {
+    list-style-type: none;
+}
+
+img {
+    user-select: none;
+    max-width: 100%;
+}
+
+input:focus-visible {
+    outline: none;
+}
+
+.container {
+    max-width: 1170px;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+
+    @include tablet {
+        max-width: 970px;
+    }
+
+    @include mobile {
+        max-width: 750px;
+    }
+}
+
+html ::-webkit-scrollbar {
+    border-radius: 0;
+    height: 8px;
+    width: 8px;
+}
+
+html ::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+}
+
+html ::-webkit-scrollbar-track {
+    background-color: transparent;
+    border-radius: 0;
+}
+
+.bg-second {
+    background-color: var(--bg-second);
+}
+
+.color-blue {
+    background-color: var(--color-blue) !important;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+        background-color: var(--color-blue-hover) !important;
+    }
+}
+
+.color-pink {
+    background-color: var(--color-pink) !important;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+        background-color: var(--color-pink-hover) !important;
+    }
+}
+
+.color-green {
+    background-color: var(--color-green) !important;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+        background-color: var(--color-green-hover) !important;
+    }
+}
+
+.overlay {
+    position: fixed;
+    inset: 0;
+    background-color: #000;
+    opacity: 0;
+    width: 100vw;
+    height: 100vh;
+    transition: opacity 0.5s ease;
+    z-index: 9999;
+    visibility: hidden;
+
+    &.active {
+        visibility: visible;
+        opacity: 0.5;
+    }
+}
+
+.check {
+    color: var(--txt-green);
+}
+
+.error {
+    color: var(--color-error);
+}

@@ -1,0 +1,52 @@
+.table {
+    width: 100%;
+    margin: 0;
+    border-collapse: separate;
+    border-spacing: 0;
+    empty-cells: show;
+    border-width: 0;
+    outline: 0;
+
+    @include tablet {
+        width: max-content;
+        max-width: 1072px;
+    }
+}
+
+.thead {
+    background-color: var(--bg-second);
+}
+
+.th {
+    color: var(--color-primary);
+    font-weight: 700;
+}
+
+.th,
+.td {
+    padding: 1rem 1.2rem;
+    border: 1px solid var(--bg-third);
+    font-size: 1.4rem;
+}
+
+.td {
+    font-weight: 400;
+}
+
+.center-border-table {
+    text-align: center;
+    vertical-align: middle;
+}
+
+.table-btn-small {
+    max-width: max-content;
+    margin: 0 auto;
+    & button {
+        min-width: unset !important;
+        padding: 0.6rem 1.4rem !important;
+        font-size: 1.2rem !important;
+        border: 1px solid var(--bg-third) !important;
+        background-color: var(--bg-main) !important;
+        color: var(--color-primary) !important;
+    }
+}

@@ -1,0 +1,98 @@
+.course-registration {
+    &__body {
+        padding-top: 2rem;
+        padding-bottom: 5rem;
+
+        &__content {
+            overflow: hidden;
+
+            &__head {
+                @include flex(center, center);
+
+                & > * ~ * {
+                    margin-left: 2rem;
+                }
+
+                & > div {
+                    @include flex(center, flex-start);
+                    & > * ~ * {
+                        margin-left: 2rem;
+                    }
+
+                    @include mobile {
+                        display: block;
+                        & > * ~ * {
+                            margin-left: unset;
+                        }
+                    }
+                }
+
+                &__input-group {
+                    cursor: pointer;
+                    @include flex(center, flex-start);
+
+                    & > * ~ * {
+                        padding-left: 0.6rem;
+                    }
+
+                    & > * {
+                        cursor: pointer;
+                    }
+                }
+            }
+
+            &__body {
+                &__group {
+                    margin-top: 4rem;
+
+                    &__head {
+                        color: rgb(7, 7, 139);
+                        margin-bottom: 1rem;
+                        @include flex(center, flex-start);
+
+                        & > span:first-child {
+                            width: 0.3rem;
+                            margin-right: 1rem;
+                            height: 1.8rem;
+                            background-color: var(--color-error);
+                            display: block;
+                        }
+                    }
+
+                    &__table {
+                        overflow-x: overlay;
+
+                        &__choose {
+                            user-select: none;
+                            cursor: pointer;
+                        }
+
+                        &__table {
+                            width: max-content;
+                            max-width: unset;
+                        }
+
+                        &__submit {
+                            margin: 1rem auto;
+                            max-width: 12rem;
+                        }
+                    }
+                }
+
+                &__collapse {
+                    display: grid;
+                    grid-template-columns: repeat(2, 1fr);
+                    gap: 1.4rem;
+
+                    @include tablet {
+                        grid-template-columns: 1fr;
+                    }
+
+                    & .table {
+                        width: unset;
+                    }
+                }
+            }
+        }
+    }
+}

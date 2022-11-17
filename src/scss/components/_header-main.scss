@@ -1,0 +1,112 @@
+.header-main {
+    position: fixed;
+    top: 0;
+    height: $height-header-main;
+    width: 100%;
+    background-color: var(--bg-main);
+    z-index: 9999;
+    border-bottom: 2px solid var(--bg-third);
+
+    &__body {
+        width: 100%;
+        height: 100%;
+
+        @include flex(center, space-between);
+
+        &__logo > img {
+            max-height: 4rem;
+        }
+
+        &__right {
+            @include flex(center, flex-start);
+
+            & > * ~ * {
+                margin-left: 1rem;
+            }
+
+            &__search {
+                min-width: 10rem;
+
+                @include mobile {
+                    display: none;
+                }
+            }
+
+            &__toggle-menu {
+                display: none;
+
+                @include tablet {
+                    cursor: pointer;
+                    display: block;
+                    font-size: 2rem;
+                    color: var(--txt-second);
+                    margin: 0 2rem;
+                }
+            }
+
+            &__user {
+                @include flex(center, center);
+                margin-right: 2rem;
+                font-size: 1.4rem;
+                color: var(--txt-second);
+                font-weight: 600;
+                user-select: none;
+                cursor: pointer;
+                @include mobile {
+                    margin: 0;
+                }
+                & > * ~ * {
+                    margin-left: 0.5rem;
+                }
+                & > img {
+                    width: 3rem;
+                    height: 3rem;
+                    border-radius: 50%;
+                    object-fit: cover;
+                }
+
+                & > span,
+                & > i {
+                    @include mobile {
+                        display: none;
+                    }
+                }
+            }
+
+            &__right {
+                color: var(--txt-second);
+                @include flex(center, flex-start);
+                & > * ~ * {
+                    margin-left: 2rem;
+                }
+
+                @include tablet {
+                    display: none;
+                }
+
+                & > a {
+                    @include flex(center, flex-start);
+                    font-size: 1.4rem;
+                    cursor: pointer;
+                    & > i {
+                        margin-right: 0.5rem;
+                        position: relative;
+                    }
+                }
+
+                &__news-tag {
+                    position: absolute;
+                    top: -0.6rem;
+                    right: -0.6rem;
+                    width: 1.4rem;
+                    height: 1.4rem;
+                    @include flex(center, center);
+                    background-color: var(--color-error);
+                    color: var(--color-white);
+                    font-size: 1rem;
+                    border-radius: 50%;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,53 @@
+.navbar {
+    position: fixed;
+    width: max-content;
+    top: 20%;
+    left: -219px;
+    z-index: 9999;
+    box-shadow: var(--box-shadow);
+    transition: left 0.3s ease;
+
+    &.active {
+        left: 0;
+    }
+
+    @include tablet {
+        display: none;
+    }
+
+    &__toggle {
+        position: absolute;
+        width: 4rem;
+        top: 0;
+        left: 100%;
+        padding: 3px;
+        background-color: var(--bg-main);
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        border: 1px solid var(--bg-third);
+        border-left-color: transparent;
+        user-select: none;
+        cursor: pointer;
+        box-shadow: 3px 3px 3px -2px rgb(0 0 0 / 10%);
+        & > i {
+            pointer-events: none;
+            font-size: 3rem !important;
+        }
+    }
+
+    & .sidebar__list__item__link {
+        position: relative;
+        padding: 1rem 1rem 1rem 2rem;
+        border-top: 1px solid var(--bg-third);
+    }
+
+    & .sidebar__list__item__dropdown {
+        .sidebar__list__item__link {
+            border-color: transparent;
+            &:last-child {
+                margin-bottom: unset;
+            }
+        }
+    }
+}

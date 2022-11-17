@@ -1,0 +1,22 @@
+.dropdown {
+    position: relative;
+    background-color: var(--bg-main);
+    border: 1px solid var(--bg-third);
+
+    &__content {
+        &__list {
+            &__item-link {
+                width: 100%;
+                font-size: 1.4rem;
+                color: var(--txt-color);
+                display: inline-block;
+                padding: 1rem 4rem 1rem 2rem;
+                background-color: var(--bg-main);
+
+                &:hover {
+                    background-color: var(--bg-second);
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,35 @@
+@mixin flex($align-item, $justify-content) {
+    display: flex;
+    align-items: $align-item;
+    justify-content: $justify-content;
+}
+
+@mixin mobile {
+    @media only screen and (max-width: $mobile-width) {
+        @content;
+    }
+}
+
+@mixin mobile-height {
+    @media only screen and (max-height: $mobile-height) and (max-width: $tablet-width) {
+        @content;
+    }
+}
+
+@mixin mobile-height-300 {
+    @media only screen and (max-height: $mobile-height-300) and (max-width: $tablet-width) {
+        @content;
+    }
+}
+
+@mixin tablet {
+    @media only screen and (max-width: $tablet-width) {
+        @content;
+    }
+}
+
+@mixin tablet1 {
+    @media only screen and (max-width: $tablet1-width) {
+        @content;
+    }
+}

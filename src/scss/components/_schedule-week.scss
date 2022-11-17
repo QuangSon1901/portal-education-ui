@@ -1,0 +1,84 @@
+.schedule-week {
+    &__body {
+        padding-top: 2rem;
+        padding-bottom: 5rem;
+
+        &__content {
+            overflow: hidden;
+
+            &__head {
+                @include flex(center, flex-end);
+
+                @include mobile {
+                    flex-wrap: wrap;
+                    justify-content: flex-start;
+
+                    & > * ~ * {
+                        margin-top: 0.4rem;
+                    }
+                }
+
+                & > * ~ * {
+                    margin-left: 0.4rem;
+                }
+
+                &__input-group {
+                    cursor: pointer;
+                    @include flex(center, flex-start);
+                    font-size: 1.4rem;
+                    margin-right: 2rem;
+                    position: relative;
+                    user-select: none;
+
+                    & > * ~ * {
+                        padding-left: 0.6rem;
+                    }
+
+                    & > * {
+                        cursor: pointer;
+                    }
+
+                    &__calendar {
+                        border-radius: 0.5rem;
+                        background-color: var(--bg-color);
+                        white-space: nowrap;
+                        border: 1px solid #ccc;
+                        outline: none;
+                        font-size: 1.2rem;
+                        padding: 4px;
+                        color: var(--txt-color);
+
+                        & ~ i {
+                            position: absolute;
+                            width: 23.6px;
+                            height: 23.6px;
+                            top: 0;
+                            right: 0.4rem;
+                            @include flex(center, center);
+                            color: #999;
+                        }
+                    }
+                }
+            }
+
+            &__body {
+                margin-top: 4rem;
+                &__table {
+                    overflow-x: overlay;
+                    &__tag {
+                        max-width: 12rem;
+                        padding: 0.6rem;
+                        margin: 0 auto;
+                        background-color: var(--bg-third);
+                        border-radius: 1rem;
+
+                        @include mobile {
+                            max-width: unset;
+                            width: max-content;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

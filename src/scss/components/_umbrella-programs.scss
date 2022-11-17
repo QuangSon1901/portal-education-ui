@@ -1,0 +1,95 @@
+.umbrella-programs {
+    &__body {
+        padding-top: 2rem;
+        padding-bottom: 5rem;
+
+        &__header {
+            &__event {
+                display: flex;
+                font-size: 1.4rem;
+
+                & > * ~ * {
+                    margin-left: 0.4rem;
+                }
+
+                & > div {
+                    padding: 0.4rem 0.6rem;
+                    border-radius: 4px;
+                    color: var(--color-white);
+                    background-color: var(--color-primary);
+                    cursor: pointer;
+                    @include flex(center, center);
+                    & > i ~ span {
+                        margin-left: 0.4rem;
+                    }
+                }
+            }
+        }
+
+        &__content {
+            margin-bottom: 4rem;
+            overflow: hidden;
+
+            &__table {
+                overflow-x: overlay;
+            }
+
+            & > * ~ * {
+                margin-top: 2rem;
+            }
+
+            &__toggle {
+                user-select: none;
+                cursor: pointer;
+                color: rgb(7, 7, 139);
+
+                & td {
+                    font-weight: 600;
+                }
+            }
+            &__tr {
+                background-color: rgb(250, 250, 250);
+                color: rgb(7, 7, 139);
+
+                & td {
+                    font-weight: 600;
+                }
+            }
+
+            &__red {
+                color: var(--color-error);
+            }
+
+            &__note {
+                & > * ~ * {
+                    margin-left: 1.6rem;
+                }
+                @include flex(center, flex-start);
+
+                & > div {
+                    @include flex(center, flex-start);
+
+                    & > div:first-child {
+                        border: 1px solid var(--bg-third);
+                        width: 4rem;
+                        height: 1.5rem;
+                        margin-right: 0.4rem;
+                    }
+
+                    & > i {
+                        font-size: 1.6rem;
+                        margin-right: 0.4rem;
+                    }
+                }
+
+                @include mobile {
+                    flex-direction: column;
+                    align-items: flex-start;
+                    & > * ~ * {
+                        margin-left: unset;
+                    }
+                }
+            }
+        }
+    }
+}
