@@ -4,6 +4,7 @@ import HeadlessTippy from '@tippyjs/react/headless';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import adminSidebarSlice from '../sidebar/adminSidebarSlice';
+import { logoutUser } from '~/pages/auth/authSlice';
 
 const AdminHeader = () => {
     const dispatch = useDispatch();
@@ -41,7 +42,12 @@ const AdminHeader = () => {
                                             <div className="dropdown__content__list__item-link">Đổi mật khẩu</div>
                                         </li>
                                         <li>
-                                            <div className="dropdown__content__list__item-link">Đăng xuất</div>
+                                            <div
+                                                className="dropdown__content__list__item-link"
+                                                onClick={() => dispatch(logoutUser())}
+                                            >
+                                                Đăng xuất
+                                            </div>
                                         </li>
                                     </ul>
                                 </div>

@@ -9,6 +9,7 @@ const authSlice = createSlice({
         isAuthenticated: false,
         user: null,
         response: null,
+        type: '',
     },
     extraReducers: (builder) => {
         builder
@@ -22,11 +23,23 @@ const authSlice = createSlice({
                     case 'success':
                         state.isAuthenticated = true;
                         state.response = payload;
-                        state.user = payload.user;
+                        if (payload.type === 's') {
+                            state.user = payload.user;
+                            state.type = 's';
+                        }
+                        if (payload.type === 't') {
+                            state.user = payload.user;
+                            state.type = 't';
+                        }
+                        if (payload.type === 'a') {
+                            state.user = null;
+                            state.type = 'a';
+                        }
                         break;
                     default:
                         state.isAuthenticated = false;
                         state.response = payload;
+                        state.type = '';
                 }
             })
             .addCase(getUser.fulfilled, (state, action) => {
@@ -36,17 +49,31 @@ const authSlice = createSlice({
                         state.isAuthenticated = true;
                         state.user = payload.user;
                         state.response = payload;
+                        if (payload.type === 's') {
+                            state.user = payload.user;
+                            state.type = 's';
+                        }
+                        if (payload.type === 't') {
+                            state.user = payload.user;
+                            state.type = 't';
+                        }
+                        if (payload.type === 'a') {
+                            state.user = null;
+                            state.type = 'a';
+                        }
                         break;
                     default:
                         state.isAuthenticated = false;
                         state.user = null;
                         state.response = payload;
+                        state.type = '';
                 }
             })
             .addCase(logoutUser.fulfilled, (state) => {
                 state.isAuthenticated = false;
                 state.user = null;
                 state.response = null;
+                state.type = '';
             });
     },
 });
@@ -69,7 +96,7 @@ export const getUser = createAsyncThunk('auth/get-user', async () => {
     const token = storage.get(process.env.REACT_APP_TOKEN);
 
     try {
-        const res = await httpRequest.get('/student', {
+        const res = await httpRequest.get('/auth/user', {
             headers: {
                 Authorization: `Bearer ${token}`,
             },

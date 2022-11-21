@@ -15,7 +15,7 @@ const PromiseLoading = () => {
                 case 200:
                 case 201:
                     toast.update(notifyEle.current, {
-                        render: authRedux.response.message,
+                        render: 'Thành công',
                         type: 'success',
                         isLoading: false,
                         autoClose: 5000,
@@ -26,7 +26,7 @@ const PromiseLoading = () => {
                     break;
                 default:
                     toast.update(notifyEle.current, {
-                        render: authRedux.response.message,
+                        render: 'Thất bại',
                         type: 'error',
                         isLoading: false,
                         autoClose: 5000,

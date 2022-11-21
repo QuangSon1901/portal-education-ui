@@ -1,0 +1,81 @@
+.admin-list-page {
+    padding-top: 2rem;
+    position: relative;
+    background-color: var(--bg-second);
+    min-height: calc(100vh - $height-header-main);
+    width: 100%;
+
+    &__body {
+        &__table {
+            &__header-event {
+                @include flex(center, flex-start);
+
+                & > * ~ * {
+                    margin-left: 1rem;
+                }
+            }
+
+            &__content {
+                overflow-x: overlay;
+            }
+        }
+
+        &__cate {
+            margin-bottom: 2rem;
+            & > ul {
+                margin-left: 1rem;
+                @include flex(center, flex-start);
+                color: var(--txt-color);
+
+                & > li {
+                    font-size: 1.4rem;
+                    padding: 1rem;
+                    @include flex(center, center);
+                    cursor: pointer;
+                    border-bottom: 1px solid transparent;
+
+                    & > * ~ * {
+                        margin-left: 1rem;
+                    }
+
+                    &.active {
+                        border-bottom: 1px solid var(--color-primary);
+                        font-weight: 600;
+                        color: var(--color-primary);
+                    }
+                }
+            }
+        }
+    }
+
+    &__modal {
+        &__content {
+            & > * {
+                margin-top: 1rem;
+            }
+
+            &__table {
+                max-height: 60vh;
+                overflow: hidden;
+                overflow-y: overlay;
+            }
+
+            &__submit {
+                width: 100%;
+                @include flex(center, flex-end);
+
+                &__btn {
+                    max-width: 20rem;
+                }
+            }
+        }
+    }
+}
+
+.btn-table-icon {
+    padding: 0.4rem;
+    font-size: 1.6rem;
+    border-radius: 0.4rem;
+    color: var(--color-white);
+    @include flex(center, center);
+}

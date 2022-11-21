@@ -3,13 +3,14 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import ProtectedRoute from './components/routing/ProtectedRoute';
 import MainLayout from './layouts/MainLayout';
-import { privateRoute, publicRoutes } from './routes';
+import { adminPrivateRoute, privateRoute, publicRoutes } from './routes';
 import '~/scss/index.scss';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
 import PromiseLoading from './components/PromiseLoading';
 import { useDispatch } from 'react-redux';
 import { getUser } from './pages/auth/authSlice';
+import AdminProtectedRoute from './components/routing/AdminProtectedRoute';
 function App() {
     const dispatch = useDispatch();
     useEffect(() => {
@@ -49,6 +50,27 @@ function App() {
 
                         return (
                             <Route key={index} path={route.path} element={<ProtectedRoute />}>
+                                <Route
+                                    path={route.path}
+                                    element={
+                                        <Layout>
+                                            <Page />
+                                        </Layout>
+                                    }
+                                />
+                            </Route>
+                        );
+                    })}
+                    {adminPrivateRoute.map((route, index) => {
+                        const Page = route.component;
+
+                        let Layout = MainLayout;
+
+                        if (route.layout) Layout = route.layout;
+                        else if (route.layout === null) Layout = Fragment;
+
+                        return (
+                            <Route key={index} path={route.path} element={<AdminProtectedRoute />}>
                                 <Route
                                     path={route.path}
                                     element={

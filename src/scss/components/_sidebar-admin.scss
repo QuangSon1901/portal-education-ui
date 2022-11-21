@@ -137,6 +137,7 @@
                 }
 
                 &__item {
+                    cursor: pointer;
                     @include flex(center, space-between);
                     padding: 1rem 1.6rem;
                     border-radius: 1rem;

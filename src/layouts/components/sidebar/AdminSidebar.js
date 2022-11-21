@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 import images from '~/assets/images';
 import Image from '~/components/Image';
 import config from '~/config';
+import { logoutUser } from '~/pages/auth/authSlice';
 import { adminSidebarSelector } from '~/redux/selector';
 import adminSidebarSlice from './adminSidebarSlice';
 
@@ -34,7 +35,7 @@ const AdminSidebar = () => {
                             <li>
                                 <NavLink
                                     to={config.routes.adminDashboard}
-                                    className="sidebar-admin__body__group__list__item active"
+                                    className="sidebar-admin__body__group__list__item"
                                 >
                                     <div>
                                         <i className="bx bx-table"></i>
@@ -46,7 +47,10 @@ const AdminSidebar = () => {
                                 </NavLink>
                             </li>
                             <li>
-                                <NavLink to="/" className="sidebar-admin__body__group__list__item">
+                                <NavLink
+                                    to={config.routes.adminProgram}
+                                    className="sidebar-admin__body__group__list__item"
+                                >
                                     <div>
                                         <i className="bx bx-objects-horizontal-left"></i>
                                         <h3>Chương trình đào tạo</h3>
@@ -57,7 +61,10 @@ const AdminSidebar = () => {
                                 </NavLink>
                             </li>
                             <li>
-                                <NavLink to="/" className="sidebar-admin__body__group__list__item">
+                                <NavLink
+                                    to={config.routes.adminFaculty}
+                                    className="sidebar-admin__body__group__list__item"
+                                >
                                     <div>
                                         <i className="bx bx-sushi"></i>
                                         <h3>Khoa</h3>
@@ -68,7 +75,10 @@ const AdminSidebar = () => {
                                 </NavLink>
                             </li>
                             <li>
-                                <NavLink to="/" className="sidebar-admin__body__group__list__item">
+                                <NavLink
+                                    to={config.routes.adminTeam}
+                                    className="sidebar-admin__body__group__list__item"
+                                >
                                     <div>
                                         <i className="bx bx-shape-square"></i>
                                         <h3>Lớp</h3>
@@ -79,9 +89,12 @@ const AdminSidebar = () => {
                                 </NavLink>
                             </li>
                             <li>
-                                <NavLink to="/" className="sidebar-admin__body__group__list__item">
+                                <NavLink
+                                    to={config.routes.adminSubject}
+                                    className="sidebar-admin__body__group__list__item"
+                                >
                                     <div>
-                                        <i className="bx bxl-visual-studio"></i>
+                                        <i className="bx bx-book-content"></i>
                                         <h3>Học phần</h3>
                                     </div>
                                     <div>
@@ -90,7 +103,10 @@ const AdminSidebar = () => {
                                 </NavLink>
                             </li>
                             <li>
-                                <NavLink to="/" className="sidebar-admin__body__group__list__item">
+                                <NavLink
+                                    to={config.routes.adminTeacher}
+                                    className="sidebar-admin__body__group__list__item"
+                                >
                                     <div>
                                         <i className="bx bx-user"></i>
                                         <h3>Giáo viên</h3>
@@ -101,7 +117,10 @@ const AdminSidebar = () => {
                                 </NavLink>
                             </li>
                             <li>
-                                <NavLink to="/" className="sidebar-admin__body__group__list__item">
+                                <NavLink
+                                    to={config.routes.adminStudent}
+                                    className="sidebar-admin__body__group__list__item"
+                                >
                                     <div>
                                         <i className="bx bx-user"></i>
                                         <h3>Sinh viên</h3>
@@ -112,7 +131,10 @@ const AdminSidebar = () => {
                                 </NavLink>
                             </li>
                             <li>
-                                <NavLink to="/" className="sidebar-admin__body__group__list__item">
+                                <NavLink
+                                    to={config.routes.adminRoom}
+                                    className="sidebar-admin__body__group__list__item"
+                                >
                                     <div>
                                         <i className="bx bx-home-smile"></i>
                                         <h3>Phòng học</h3>
@@ -139,7 +161,10 @@ const AdminSidebar = () => {
                                 </NavLink>
                             </li>
                             <li>
-                                <NavLink to="/" className="sidebar-admin__body__group__list__item">
+                                <NavLink
+                                    to={config.routes.adminClassSubject}
+                                    className="sidebar-admin__body__group__list__item"
+                                >
                                     <div>
                                         <i className="bx bx-objects-horizontal-center"></i>
                                         <h3>Lớp học phần</h3>
@@ -150,7 +175,10 @@ const AdminSidebar = () => {
                                 </NavLink>
                             </li>
                             <li>
-                                <NavLink to="/" className="sidebar-admin__body__group__list__item">
+                                <NavLink
+                                    to={config.routes.adminCreateSchedule}
+                                    className="sidebar-admin__body__group__list__item"
+                                >
                                     <div>
                                         <i className="bx bx-calendar-alt"></i>
                                         <h3>Lập thời khoá biểu</h3>
@@ -188,7 +216,10 @@ const AdminSidebar = () => {
                                 </NavLink>
                             </li>
                             <li>
-                                <NavLink to="/" className="sidebar-admin__body__group__list__item">
+                                <div
+                                    className="sidebar-admin__body__group__list__item"
+                                    onClick={() => dispatch(logoutUser())}
+                                >
                                     <div>
                                         <i className="bx bx-log-out"></i>
                                         <h3>Đăng xuất</h3>
@@ -196,7 +227,7 @@ const AdminSidebar = () => {
                                     <div>
                                         <i className="bx bx-minus"></i>
                                     </div>
-                                </NavLink>
+                                </div>
                             </li>
                         </ul>
                     </div>

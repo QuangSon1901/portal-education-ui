@@ -7,6 +7,15 @@ const routes = {
     scheduleWeek: '/schedule-week',
     test: '/test',
     adminDashboard: '/admin/dashboard',
+    adminFaculty: '/admin/faculty',
+    adminProgram: '/admin/program',
+    adminRoom: '/admin/room',
+    adminStudent: '/admin/student',
+    adminTeacher: '/admin/teacher',
+    adminTeam: '/admin/team',
+    adminSubject: '/admin/subject',
+    adminClassSubject: '/admin/class-subject',
+    adminCreateSchedule: '/admin/create-schedule',
 };
 
 export default routes;

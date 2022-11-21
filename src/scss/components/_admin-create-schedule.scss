@@ -1,0 +1,115 @@
+.create-schedule {
+    &__body {
+        & > * ~ * {
+            margin-top: 2rem;
+        }
+
+        &__content {
+            overflow: hidden;
+            &__form {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 2rem;
+
+                @include tablet {
+                    grid-template-columns: repeat(1, 1fr);
+                }
+
+                @include mobile {
+                    overflow-y: overlay;
+                }
+            }
+
+            &__group {
+                & > div:first-child {
+                    font-size: 1.4rem;
+                    font-weight: 600;
+                    padding-right: 2rem;
+
+                    @include flex(center, space-between);
+                }
+
+                &:first-child {
+                    border-right: 1px solid #ccc;
+                }
+
+                &__input {
+                    & > * {
+                        margin-top: 2rem;
+                    }
+                    & > li {
+                        & > div {
+                            margin: 1rem 0;
+                            @include flex(center, flex-start);
+
+                            & > div:first-child {
+                                width: 50%;
+                                margin-right: 1rem;
+                            }
+
+                            & > div:last-child {
+                                @include flex(center, flex-start);
+                                & > * ~ * {
+                                    margin-left: 1rem;
+                                }
+
+                                & > button {
+                                    @include flex(flex-end, center);
+                                }
+
+                                & span {
+                                    font-size: 1rem;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            &__submit {
+                width: 100%;
+                padding: 1rem 0;
+                @include flex(center, flex-end);
+
+                &__btn {
+                    max-width: 20rem;
+                }
+            }
+
+            &__schedule {
+                &__head {
+                    @include flex(center, space-between);
+
+                    &__left,
+                    &__right {
+                        @include flex(center, flex-start);
+
+                        & > * ~ * {
+                            margin-left: 1rem;
+                        }
+
+                        & > div {
+                            user-select: none;
+                            padding: 0.4rem 1rem;
+                            color: var(--color-white);
+                            border-radius: 0.4rem;
+                            cursor: pointer;
+                            background-color: var(--color-primary);
+                            @include flex(center, center);
+                        }
+                    }
+                }
+
+                &__body {
+                    margin-top: 1rem;
+                    margin-bottom: 4rem;
+
+                    &__table {
+                        margin-top: 1rem;
+                        overflow-x: overlay;
+                    }
+                }
+            }
+        }
+    }
+}
