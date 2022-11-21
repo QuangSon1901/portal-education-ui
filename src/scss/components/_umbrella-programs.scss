@@ -32,6 +32,10 @@
 
             &__table {
                 overflow-x: overlay;
+
+                & tr.hidden {
+                    display: none;
+                }
             }
 
             & > * ~ * {

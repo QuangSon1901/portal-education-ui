@@ -24,9 +24,9 @@ export const TBody = ({ className, children, ...props }) => {
     );
 };
 
-export const Tr = ({ className, children, ...props }) => {
+export const Tr = ({ className, onClick, children, ...props }) => {
     return (
-        <tr className={`tr ${className}`} {...props}>
+        <tr className={`tr ${className}`} onClick={onClick} {...props}>
             {children}
         </tr>
     );

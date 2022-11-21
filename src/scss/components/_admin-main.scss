@@ -1,0 +1,7 @@
+.admin {
+    display: flex;
+
+    & > *:last-child {
+        flex: 1;
+    }
+}

@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import config from '~/config';
+import { logoutUser } from '~/pages/auth/authSlice';
 
 const Navbar = () => {
+    const dispatch = useDispatch();
     const [toggleNavbar, setToggleNavbar] = useState(false);
     const [dropdown, setDropdown] = useState({});
     return (
@@ -125,12 +128,12 @@ const Navbar = () => {
                     </div>
                 </li>
                 <li className="sidebar__list__item">
-                    <Link to="/" className="sidebar__list__item__link">
+                    <div className="sidebar__list__item__link" onClick={() => dispatch(logoutUser())}>
                         <div>
                             <i className="bx bx-log-out"></i>
                             Đăng xuất
                         </div>
-                    </Link>
+                    </div>
                 </li>
             </ul>
         </div>

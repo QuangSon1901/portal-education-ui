@@ -1,8 +1,39 @@
-import React from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import Card, { CardContent, CardHeader } from '~/components/Card';
 import Table, { TBody, TD, TH, THead, Tr } from '~/components/Table';
+import * as httpResquest from '~/utils/httpRequest';
+import { storage } from '~/utils/storage';
 
 const UmbrellaProgram = () => {
+    const [umbrellaData, setUmbrellaData] = useState({});
+    const [collapse, setCollapse] = useState({});
+    useEffect(() => {
+        const fetchData = async () => {
+            if (!storage.get(process.env.REACT_APP_TOKEN))
+                return { status: 401, success: 'error', message: 'No token!' };
+            const token = storage.get(process.env.REACT_APP_TOKEN);
+            try {
+                const res = await httpResquest.get('/umbrella-program', {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+
+                if (res.success === 'success') {
+                    let result = res.umbrella_programs.reduce(function (r, a) {
+                        r[a.term] = r[a.term] || [];
+                        r[a.term].push(a);
+                        return r;
+                    }, Object.create(null));
+                    setUmbrellaData(result);
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        };
+        fetchData();
+    }, []);
+
     return (
         <div className="container umbrella-programs">
             <div className="umbrella-programs__body">
@@ -41,125 +72,135 @@ const UmbrellaProgram = () => {
                                         </Tr>
                                     </THead>
                                     <TBody>
-                                        <Tr className="umbrella-programs__body__content__toggle umbrella-programs__body__content__tr">
-                                            <TD colSpan="4" className="center-border-table">
-                                                Học kỳ 1
-                                            </TD>
-                                            <TD className="center-border-table">18</TD>
-                                            <TD colSpan="5" className="center-border-table" />
-                                        </Tr>
-                                        <Tr className="umbrella-programs__body__content__collapse umbrella-programs__body__content__tr">
-                                            <TD colSpan="4" className="left-border-table">
-                                                Học phần bắt buộc
-                                            </TD>
-                                            <TD className="center-border-table">11</TD>
-                                            <TD colSpan="5" className="center-border-table" />
-                                        </Tr>
-                                        <Tr>
-                                            <TD>1</TD>
-                                            <TD>Tin học đại cương</TD>
-                                            <TD>00008</TD>
-                                            <TD></TD>
-                                            <TD>2</TD>
-                                            <TD>30</TD>
-                                            <TD>0</TD>
-                                            <TD>0</TD>
-                                            <TD></TD>
-                                            <TD>
-                                                <i className="bx bxs-check-square check"></i>
-                                            </TD>
-                                        </Tr>
-                                        <Tr className="umbrella-programs__body__content__collapse umbrella-programs__body__content__tr">
-                                            <TD colSpan="4" className="">
-                                                Học phần tự chọn
-                                            </TD>
-                                            <TD className="center-border-table">11</TD>
-                                            <TD colSpan="5" className="center-border-table" />
-                                        </Tr>
-                                        <Tr>
-                                            <TD>1</TD>
-                                            <TD>Tin học đại cương</TD>
-                                            <TD>00008</TD>
-                                            <TD></TD>
-                                            <TD>2</TD>
-                                            <TD>30</TD>
-                                            <TD>0</TD>
-                                            <TD>0</TD>
-                                            <TD></TD>
-                                            <TD>
-                                                <i className="bx bxs-check-square check"></i>
-                                            </TD>
-                                        </Tr>
-                                        <Tr className="umbrella-programs__body__content__toggle umbrella-programs__body__content__tr">
-                                            <TD colSpan="4" className="center-border-table">
-                                                Học kỳ 2
-                                            </TD>
-                                            <TD className="center-border-table">18</TD>
-                                            <TD colSpan="5" className="center-border-table" />
-                                        </Tr>
-                                        <Tr className="umbrella-programs__body__content__collapse umbrella-programs__body__content__tr">
-                                            <TD colSpan="4" className="">
-                                                Học phần bắt buộc
-                                            </TD>
-                                            <TD className="center-border-table">11</TD>
-                                            <TD colSpan="5" className="center-border-table" />
-                                        </Tr>
-                                        <Tr>
-                                            <TD>1</TD>
-                                            <TD>Tin học đại cương</TD>
-                                            <TD>00008</TD>
-                                            <TD></TD>
-                                            <TD>2</TD>
-                                            <TD>30</TD>
-                                            <TD>0</TD>
-                                            <TD>0</TD>
-                                            <TD></TD>
-                                            <TD>
-                                                <i className="bx bxs-check-square check"></i>
-                                            </TD>
-                                        </Tr>
-                                        <Tr className="umbrella-programs__body__content__collapse umbrella-programs__body__content__tr">
-                                            <TD colSpan="4" className="left-border-table">
-                                                Học phần tự chọn
-                                            </TD>
-                                            <TD className="center-border-table">11</TD>
-                                            <TD colSpan="5" className="center-border-table" />
-                                        </Tr>
-                                        <Tr>
-                                            <TD>1</TD>
-                                            <TD>Tin học đại cương</TD>
-                                            <TD>00008</TD>
-                                            <TD></TD>
-                                            <TD>2</TD>
-                                            <TD>30</TD>
-                                            <TD>0</TD>
-                                            <TD>0</TD>
-                                            <TD></TD>
-                                            <TD>
-                                                <i className="bx bxs-check-square check"></i>
-                                            </TD>
-                                        </Tr>
-                                        <Tr className="umbrella-programs__body__content__toggle umbrella-programs__body__content__tr">
-                                            <TD colSpan="4">Tổng TC yêu cầu</TD>
-                                            <TD className="center-border-table umbrella-programs__body__content__red">
-                                                205
-                                            </TD>
-                                            <TD colSpan="5" className="center-border-table" />
-                                        </Tr>
-                                        <Tr className="umbrella-programs__body__content__toggle umbrella-programs__body__content__tr">
-                                            <TD colSpan="4">Tổng TC bắt buộc</TD>
-                                            <TD className="center-border-table umbrella-programs__body__content__red">
-                                                135
-                                            </TD>
-                                            <TD colSpan="5" className="center-border-table" />
-                                        </Tr>
-                                        <Tr className="umbrella-programs__body__content__toggle umbrella-programs__body__content__tr">
-                                            <TD colSpan="4">Tổng TC tự chọn</TD>
-                                            <TD className="center-border-table umbrella-programs__body__content__red">
-                                                73
-                                            </TD>
-                                            <TD colSpan="5" className="center-border-table" />
-                                        </Tr>
+                                        {Object.keys(umbrellaData).map((item, index) => {
+                                            let stt = 1;
+                                            return (
+                                                <Fragment key={index}>
+                                                    <Tr
+                                                        className="umbrella-programs__body__content__toggle umbrella-programs__body__content__tr"
+                                                        onClick={() => setCollapse({ [item]: !collapse[item] })}
+                                                    >
+                                                        <TD colSpan="4" className="center-border-table">
+                                                            Học kỳ {item}
+                                                        </TD>
+                                                        <TD className="center-border-table">
+                                                            {umbrellaData[item].reduce((r, i) => (r += i.credits), 0)}
+                                                        </TD>
+                                                        <TD colSpan="5" className="center-border-table" />
+                                                    </Tr>
+                                                    {umbrellaData[item].filter((x) => x.type_subject === 'bắt buộc')
+                                                        .length > 0 && (
+                                                        <Tr
+                                                            className={`umbrella-programs__body__content__collapse umbrella-programs__body__content__tr ${
+                                                                !collapse[item] && 'hidden'
+                                                            }`}
+                                                        >
+                                                            <TD colSpan="4" className="left-border-table">
+                                                                Học phần bắt buộc
+                                                            </TD>
+                                                            <TD className="center-border-table">
+                                                                {umbrellaData[item].reduce(
+                                                                    (r, i) =>
+                                                                        i.type_subject === 'bắt buộc'
+                                                                            ? (r += i.credits)
+                                                                            : r,
+                                                                    0,
+                                                                )}
+                                                            </TD>
+                                                            <TD colSpan="5" className="center-border-table" />
+                                                        </Tr>
+                                                    )}
+
+                                                    {umbrellaData[item].map((item2, index2) => {
+                                                        if (item2.type_subject === 'bắt buộc')
+                                                            return (
+                                                                <Tr
+                                                                    key={index2}
+                                                                    className={`${!collapse[item] && 'hidden'}`}
+                                                                >
+                                                                    <TD className="center-border-table">{stt++}</TD>
+                                                                    <TD>{item2.subject}</TD>
+                                                                    <TD className="center-border-table">
+                                                                        {item2.code}
+                                                                    </TD>
+                                                                    <TD className="center-border-table"></TD>
+                                                                    <TD className="center-border-table">
+                                                                        {item2.credits}
+                                                                    </TD>
+                                                                    <TD className="center-border-table">
+                                                                        {item2.theory_lesson}
+                                                                    </TD>
+                                                                    <TD className="center-border-table">
+                                                                        {item2.practice_lesson}
+                                                                    </TD>
+                                                                    <TD className="center-border-table">0</TD>
+                                                                    <TD></TD>
+                                                                    <TD>
+                                                                        <i className="bx bxs-check-square check"></i>
+                                                                    </TD>
+                                                                </Tr>
+                                                            );
+
+                                                        return null;
+                                                    })}
+                                                    {umbrellaData[item].filter((x) => x.type_subject === 'tự chọn')
+                                                        .length > 0 && (
+                                                        <Tr
+                                                            className={`umbrella-programs__body__content__collapse umbrella-programs__body__content__tr ${
+                                                                !collapse[item] && 'hidden'
+                                                            }`}
+                                                        >
+                                                            <TD colSpan="4" className="">
+                                                                Học phần tự chọn
+                                                            </TD>
+                                                            <TD className="center-border-table">
+                                                                {umbrellaData[item].reduce(
+                                                                    (r, i) =>
+                                                                        i.type_subject === 'tự chọn'
+                                                                            ? (r += i.credits)
+                                                                            : r,
+                                                                    0,
+                                                                )}
+                                                            </TD>
+                                                            <TD colSpan="5" className="center-border-table" />
+                                                        </Tr>
+                                                    )}
+
+                                                    {umbrellaData[item].map((item2, index2) => {
+                                                        if (item2.type_subject === 'tự chọn')
+                                                            return (
+                                                                <Tr
+                                                                    key={index2}
+                                                                    className={`${!collapse[item] && 'hidden'}`}
+                                                                >
+                                                                    <TD className="center-border-table">{stt++}</TD>
+                                                                    <TD>{item2.subject}</TD>
+                                                                    <TD className="center-border-table">
+                                                                        {item2.code}
+                                                                    </TD>
+                                                                    <TD className="center-border-table"></TD>
+                                                                    <TD className="center-border-table">
+                                                                        {item2.credits}
+                                                                    </TD>
+                                                                    <TD className="center-border-table">
+                                                                        {item2.theory_lesson}
+                                                                    </TD>
+                                                                    <TD className="center-border-table">
+                                                                        {item2.practice_lesson}
+                                                                    </TD>
+                                                                    <TD className="center-border-table">0</TD>
+                                                                    <TD></TD>
+                                                                    <TD>
+                                                                        <i className="bx bxs-check-square check"></i>
+                                                                    </TD>
+                                                                </Tr>
+                                                            );
+
+                                                        return null;
+                                                    })}
+                                                </Fragment>
+                                            );
+                                        })}
                                     </TBody>
                                 </Table>
                             </div>

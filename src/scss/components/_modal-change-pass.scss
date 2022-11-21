@@ -1,0 +1,15 @@
+.change-pass {
+    &__content {
+        margin: 1rem 0;
+        &__form {
+            &__submit {
+                max-width: max-content;
+                margin-left: auto;
+                & button {
+                    min-width: unset !important;
+                    padding: 0.6rem 1.4rem !important;
+                }
+            }
+        }
+    }
+}

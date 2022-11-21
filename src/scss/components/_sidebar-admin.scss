@@ -1,0 +1,169 @@
+.sidebar-admin {
+    position: relative;
+    width: 264px;
+    height: 100vh;
+    z-index: 9999;
+    border-right: 1px solid #dee4ec;
+    transition: all 0.3s ease;
+
+    &__overlay {
+        display: none;
+        @include mobile {
+            display: block;
+        }
+    }
+
+    @include mobile {
+        position: fixed;
+        top: 0;
+        left: 0;
+    }
+
+    &.active {
+        width: 60px;
+
+        @include mobile {
+            width: 0;
+            overflow: hidden;
+        }
+    }
+
+    &.active &__header {
+        &__logo {
+            &__big {
+                display: none;
+            }
+            &__small {
+                width: 2.4rem;
+                height: 2.4rem;
+                display: block;
+            }
+        }
+
+        &__avatar {
+            display: none;
+        }
+    }
+
+    &.active &__body {
+        max-height: calc(100vh - $height-header-main);
+        margin-top: $height-header-main;
+        padding: 0.5rem;
+
+        &__group {
+            & > p {
+                display: none;
+            }
+
+            &__list {
+                &__item {
+                    & > *:first-child {
+                        @include flex(center, center);
+                        & > * {
+                            display: none;
+                        }
+
+                        & > i {
+                            margin: 0;
+                            display: block;
+                        }
+                    }
+
+                    & > *:last-child {
+                        display: none;
+                    }
+                }
+            }
+        }
+    }
+
+    &__header {
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+        background-color: var(--bg-main);
+        width: 100%;
+        &__logo {
+            height: $height-header-main;
+            @include flex(center, center);
+
+            & > img {
+                height: calc($height-header-main - 3rem);
+            }
+
+            &__small {
+                display: none;
+            }
+        }
+
+        &__avatar {
+            padding: 2rem 0;
+            @include flex(center, center);
+            flex-direction: column;
+            color: var(--txt-color);
+
+            & > * ~ * {
+                margin-top: 1rem;
+            }
+
+            & > img {
+                width: 8rem;
+                height: 8rem;
+                border-radius: 1.6rem;
+                border: 2px solid #fff;
+                box-shadow: 0 5px 25px 0 rgb(0 0 0 / 20%);
+                object-fit: cover;
+            }
+        }
+    }
+
+    &__body {
+        background-color: var(--bg-main);
+        color: var(--txt-color);
+        overflow-y: overlay;
+        max-height: calc(100vh - 236px);
+        padding: 1rem 1rem 4rem;
+        margin-top: 236px;
+        &__group {
+            & > p {
+                margin: 1rem;
+                font-size: 1.4rem;
+            }
+
+            &__list {
+                & > * ~ * {
+                    margin-top: 1rem;
+                }
+
+                &__item {
+                    @include flex(center, space-between);
+                    padding: 1rem 1.6rem;
+                    border-radius: 1rem;
+
+                    & > *:first-child {
+                        @include flex(center, flex-start);
+
+                        & > i {
+                            font-size: 2rem;
+                            margin-right: 1rem;
+                        }
+                    }
+
+                    & > *:last-child {
+                        font-size: 1.6rem;
+                        display: none;
+                    }
+
+                    &.active {
+                        background-color: var(--bg-second);
+                    }
+
+                    &.active > *:last-child {
+                        display: block;
+                    }
+                }
+            }
+        }
+    }
+}

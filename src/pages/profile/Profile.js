@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import Card, { CardContent } from '~/components/Card';
 import Image from '~/components/Image';
 import Table, { TBody, TD, TH, THead, Tr } from '~/components/Table';
+import { authSelector } from '~/redux/selector';
 
 const Profile = () => {
+    const { user } = useSelector(authSelector);
+
     const [chooseInfo, setChooseInfo] = useState({ info: true });
     return (
         <div className="container profile">
@@ -15,10 +19,10 @@ const Profile = () => {
                                 <Image src="https://student.hiu.vn/Content/images/no_avatar.svg" />
                                 <div>
                                     <p>
-                                        MSSV:&#160;<b>191101030</b>
+                                        MSSV:&#160;<b>{user && user.code}</b>
                                     </p>
                                     <p>
-                                        Họ tên:&#160;<b>Vũ Quang Sơn</b>
+                                        Họ tên:&#160;<b>{user && user.name}</b>
                                     </p>
                                     <p>
                                         Giới tính:&#160;<b>Nam</b>
@@ -33,30 +37,30 @@ const Profile = () => {
                                             Trạng thái:&#160;<b>Đang tích luỹ tín chỉ</b>
                                         </p>
                                         <p>
-                                            Lớp học:&#160;<b>TH19DH-TH1</b>
+                                            Lớp học:&#160;<b>{user && user.team}</b>
                                         </p>
                                         <p>
                                             Bậc đào tạo:&#160;<b>Đại học</b>
                                         </p>
                                         <p>
-                                            Khoa:&#160;<b>Khoa công nghệ - kỹ thuật</b>
+                                            Khoa:&#160;<b>{user && user.faculty}</b>
                                         </p>
                                         <p>
-                                            Chuyên nghành:&#160;<b>Công nghệ thông tin</b>
+                                            Chuyên nghành:&#160;<b>{user && user.faculty}</b>
                                         </p>
                                     </div>
                                     <div>
                                         <p>
-                                            Ngày vào trường:&#160;<b>27/5/2022</b>
+                                            Ngày vào trường:&#160;<b>{user && user.year_start}</b>
                                         </p>
                                         <p>
                                             Cơ sở:&#160;<b>Cơ sở chính</b>
                                         </p>
                                         <p>
-                                            Loại hình đào tạo:&#160;<b>Chính quy</b>
+                                            Loại hình đào tạo:&#160;<b>{user && user.program}</b>
                                         </p>
                                         <p>
-                                            Ngành:&#160;<b>Công nghệ thông tin</b>
+                                            Ngành:&#160;<b>{user && user.faculty}</b>
                                         </p>
                                         <p>
                                             Khoá học:&#160;<b>DHCQK2019</b>
@@ -88,7 +92,7 @@ const Profile = () => {
                                 <div></div>
                             </div>
                             <div className="profile__body__nav-tab__content">
-                                {chooseInfo.info && <InfoStudent />}
+                                {chooseInfo.info && <InfoStudent data={user} />}
                                 {chooseInfo.profile && <ProfileStudent />}
                                 {chooseInfo.decision && <DecisionStudent />}
                             </div>
@@ -100,12 +104,12 @@ const Profile = () => {
     );
 };
 
-const InfoStudent = () => {
+const InfoStudent = ({ data }) => {
     return (
         <div className="profile__body__nav-tab__content__text">
             <div>
                 <p>
-                    Ngày sinh:&#160;<b>19/01/2001</b>
+                    Ngày sinh:&#160;<b>{data && data.birth}</b>
                 </p>
                 <p>
                     Đối tượng:&#160;<b></b>
@@ -114,13 +118,13 @@ const InfoStudent = () => {
                     Ngày vào đoàn:&#160;<b></b>
                 </p>
                 <p>
-                    Điện thoại:&#160;<b>0394062185</b>
+                    Điện thoại:&#160;<b>{data && data.phone}</b>
                 </p>
                 <p>
-                    Email:&#160;<b>quangsonbmt760@gmail.com</b>
+                    Email:&#160;<b>{data && data.email}</b>
                 </p>
                 <p>
-                    Email HIU:&#160;<b>sonvq1901030@student.hiu.vn</b>
+                    Email HIU:&#160;<b>{data && data.email_school}</b>
                 </p>
                 <p>
                     Nơi sinh:&#160;<b>Tỉnh Đắk Lắk</b>

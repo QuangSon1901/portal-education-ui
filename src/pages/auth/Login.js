@@ -1,13 +1,16 @@
 import { useFormik } from 'formik';
-import React from 'react';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import * as Yup from 'yup';
 
 import images from '~/assets/images';
 import Image from '~/components/Image';
 import InputCustom from '~/components/InputCustom';
+import { loginUser } from './authSlice';
 
 const Login = () => {
+    const dispatch = useDispatch();
+
     const formik = useFormik({
         initialValues: {
             code: '',
@@ -17,7 +20,9 @@ const Login = () => {
             code: Yup.string().required('Vui lòng nhập mã sinh viên'),
             password: Yup.string().required('Vui lòng nhập mật khẩu'),
         }),
-        onSubmit(value) {},
+        onSubmit(values) {
+            dispatch(loginUser(values));
+        },
     });
     return (
         <form className="login" onSubmit={formik.handleSubmit}>

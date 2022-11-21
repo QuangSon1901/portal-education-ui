@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Card, { CardContent, CardHeader } from '~/components/Card';
 import Image from '~/components/Image';
 import InputCustom from '~/components/InputCustom';
 import config from '~/config';
+import { authSelector } from '~/redux/selector';
 
 const Home = () => {
+    const { user } = useSelector(authSelector);
     return (
         <div className="container home-main">
             <div className="home-main__body">
@@ -36,7 +39,8 @@ const Home = () => {
                                             <b>Ngày xét tuyển:&#160;</b>
                                         </p>
                                         <p>
-                                            <b>Ngày nhập học:&#160;</b>13/08/2019
+                                            <b>Ngày nhập học:&#160;</b>
+                                            {user && user.year_start}
                                         </p>
                                         <p>
                                             <b>Mã hồ sơ:&#160;</b>
@@ -54,16 +58,19 @@ const Home = () => {
                                 <CardContent className="grid-2">
                                     <div>
                                         <p>
-                                            <b>Mã sinh viên:&#160;</b>191101030
+                                            <b>Mã sinh viên:&#160;</b>
+                                            {user && user.code}
                                         </p>
                                         <p>
-                                            <b>Họ và tên:&#160;</b>Vũ Quang Sơn
+                                            <b>Họ và tên:&#160;</b>
+                                            {user && user.name}
                                         </p>
                                         <p>
                                             <b>Giới tính:&#160;</b>Nam
                                         </p>
                                         <p>
-                                            <b>Ngày sinh:&#160;</b>19/01/2001
+                                            <b>Ngày sinh:&#160;</b>
+                                            {user && user.birth}
                                         </p>
                                         <p>
                                             <b>Nơi sinh:&#160;</b>Tỉnh Đắk Lắk
@@ -77,16 +84,19 @@ const Home = () => {
                                             <b>Khóa học:&#160;</b>DHCQK2019
                                         </p>
                                         <p>
-                                            <b>Lớp học:&#160;</b>TH19DH-TH1
+                                            <b>Lớp học:&#160;</b>
+                                            {user && user.team}
                                         </p>
                                         <p>
                                             <b>Bậc học:&#160;</b>Đại học
                                         </p>
                                         <p>
-                                            <b>Loại đào tạo:&#160;</b>Chính quy
+                                            <b>Loại đào tạo:&#160;</b>
+                                            {user && user.program}
                                         </p>
                                         <p>
-                                            <b>Ngành học:&#160;</b>Công nghệ thông tin
+                                            <b>Ngành học:&#160;</b>
+                                            {user && user.faculty}
                                         </p>
                                     </div>
                                 </CardContent>

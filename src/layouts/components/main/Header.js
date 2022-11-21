@@ -8,8 +8,16 @@ import { Link } from 'react-router-dom';
 import Sidebar from '../sidebar/Sidebar';
 import config from '~/config';
 import Navbar from '../navbar/Navbar';
+import { useDispatch, useSelector } from 'react-redux';
+import { logoutUser } from '~/pages/auth/authSlice';
+import { authSelector } from '~/redux/selector';
+import Modal, { ModalContent, ModalHeader } from '~/components/Modal';
+import ModalChangePass from '~/components/ModalChangePass';
+import changePassSlice from '~/components/ModalChangePass/changePassSlice';
 
 const Header = () => {
+    const dispatch = useDispatch();
+    const { user } = useSelector(authSelector);
     const [userMenu, setUserMenu] = useState(false);
     const [sidebarToggle, setSidebarToggle] = useState(false);
 
@@ -50,14 +58,20 @@ const Header = () => {
                                                     </Link>
                                                 </li>
                                                 <li>
-                                                    <Link to="/" className="dropdown__content__list__item-link">
+                                                    <div
+                                                        className="dropdown__content__list__item-link"
+                                                        onClick={() => dispatch(changePassSlice.actions.toggle())}
+                                                    >
                                                         Đổi mật khẩu
-                                                    </Link>
+                                                    </div>
                                                 </li>
                                                 <li>
-                                                    <Link to="/" className="dropdown__content__list__item-link">
+                                                    <div
+                                                        className="dropdown__content__list__item-link"
+                                                        onClick={() => dispatch(logoutUser())}
+                                                    >
                                                         Đăng xuất
-                                                    </Link>
+                                                    </div>
                                                 </li>
                                             </ul>
                                         </div>
@@ -67,7 +81,7 @@ const Header = () => {
                             >
                                 <div className="header-main__body__right__user" onClick={() => setUserMenu(!userMenu)}>
                                     <Image src="https://student.hiu.vn/Content/images/no_avatar.svg" />
-                                    <span>Vũ Quang Sơn</span>
+                                    <span>{user && user.name}</span>
                                     <i className="bx bx-chevron-down"></i>
                                 </div>
                             </HeadlessTippy>
@@ -91,6 +105,7 @@ const Header = () => {
             </header>
             <Sidebar toggle={sidebarToggle} close={() => setSidebarToggle(false)} />
             <Navbar />
+            <ModalChangePass />
         </>
     );
 };
