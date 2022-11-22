@@ -79,3 +79,11 @@
     color: var(--color-white);
     @include flex(center, center);
 }
+
+tr.hidden {
+    display: none;
+}
+
+.test {
+    vertical-align: top;
+}

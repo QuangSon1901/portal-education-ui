@@ -40,9 +40,9 @@ export const TH = ({ className, children, ...props }) => {
     );
 };
 
-export const TD = ({ className, children, ...props }) => {
+export const TD = ({ className, style, children, ...props }) => {
     return (
-        <td className={`td ${className}`} {...props}>
+        <td className={`td ${className}`} style={style} {...props}>
             {children}
         </td>
     );
