@@ -60,3 +60,18 @@
         margin-left: 0.4rem;
     }
 }
+
+.status-success {
+    font-weight: 600;
+    color: #21b531;
+}
+
+.status-error {
+    font-weight: 600;
+    color: var(--color-error);
+}
+
+.status-danger {
+    color: #df6c0b;
+    font-weight: 600;
+}

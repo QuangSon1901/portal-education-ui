@@ -4,6 +4,7 @@ import AuthLayout from '~/layouts/AuthLayout';
 import ClassSubject from '~/pages/admin/ClassSubject/ClassSubject';
 import CreateSchedule from '~/pages/admin/CreateSchedule/CreateSchedule';
 import Dashboard from '~/pages/admin/Dashboard';
+import EnrollClass from '~/pages/admin/EnrollClass/EnrollClass';
 import Faculty from '~/pages/admin/Faculty/Faculty';
 import Program from '~/pages/admin/Program/Program';
 import Room from '~/pages/admin/Room/Room';
@@ -103,6 +104,11 @@ export const adminPrivateRoute = [
     {
         path: config.routes.adminCreateSchedule,
         component: CreateSchedule,
+        layout: AdminLayout,
+    },
+    {
+        path: config.routes.adminEnrollClassSubject,
+        component: EnrollClass,
         layout: AdminLayout,
     },
 ];

@@ -77,8 +77,20 @@ const ClassSubject = () => {
                                                     <TD>{classSubject.type_subject}</TD>
                                                     <TD>{classSubject.max_student}</TD>
                                                     <TD>{classSubject.min_student}</TD>
-                                                    <TD className="center-border-table">
-                                                        {classSubject.status === 0 ? 'Đang mở' : 'Đã khoá'}
+                                                    <TD
+                                                        className={`center-border-table ${
+                                                            classSubject.status === 0
+                                                                ? 'status-danger'
+                                                                : classSubject.status === 1
+                                                                ? 'status-success'
+                                                                : 'status-error'
+                                                        }`}
+                                                    >
+                                                        {classSubject.status === 0
+                                                            ? 'Chưa mở'
+                                                            : classSubject.status === 1
+                                                            ? 'Đã mở'
+                                                            : 'Đã khoá'}
                                                     </TD>
                                                     <TD>
                                                         <div className="flex-action-table">

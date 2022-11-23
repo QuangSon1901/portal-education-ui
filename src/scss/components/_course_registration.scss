@@ -57,6 +57,14 @@
                             background-color: var(--color-error);
                             display: block;
                         }
+                        &__submit {
+                            flex: 1;
+                            padding-right: 1rem;
+                            cursor: pointer;
+                            text-decoration: underline;
+                            color: var(--color-error);
+                            @include flex(center, flex-end);
+                        }
                     }
 
                     &__table {
@@ -89,7 +97,9 @@
                     }
 
                     & .table {
-                        width: unset;
+                        @include tablet {
+                            width: unset;
+                        }
                     }
                 }
             }

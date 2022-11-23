@@ -150,10 +150,13 @@ const AdminSidebar = () => {
                         <p>Đào tạo</p>
                         <ul className="sidebar-admin__body__group__list">
                             <li>
-                                <NavLink to="/" className="sidebar-admin__body__group__list__item">
+                                <NavLink
+                                    to={config.routes.adminEnrollClassSubject}
+                                    className="sidebar-admin__body__group__list__item"
+                                >
                                     <div>
                                         <i className="bx bx-objects-horizontal-left"></i>
-                                        <h3>Đăng ký học phần</h3>
+                                        <h3>Mở học phần</h3>
                                     </div>
                                     <div>
                                         <i className="bx bx-minus"></i>

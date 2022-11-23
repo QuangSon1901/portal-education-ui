@@ -1,8 +1,8 @@
 import React from 'react';
 
-const Table = ({ className, children, ...props }) => {
+const Table = ({ className, children, style, ...props }) => {
     return (
-        <table className={`table ${className}`} {...props}>
+        <table className={`table ${className}`} style={style} {...props}>
             {children}
         </table>
     );

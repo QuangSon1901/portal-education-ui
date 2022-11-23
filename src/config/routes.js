@@ -16,6 +16,7 @@ const routes = {
     adminSubject: '/admin/subject',
     adminClassSubject: '/admin/class-subject',
     adminCreateSchedule: '/admin/create-schedule',
+    adminEnrollClassSubject: '/admin/enroll-subject',
 };
 
 export default routes;

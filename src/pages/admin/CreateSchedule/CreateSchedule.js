@@ -1,4 +1,5 @@
 import React, { Fragment, useEffect, useRef, useState } from 'react';
+import { toast } from 'react-toastify';
 import Card, { CardContent, CardHeader } from '~/components/Card';
 import InputCustom from '~/components/InputCustom';
 import Modal, { ModalContent, ModalHeader } from '~/components/Modal';
@@ -18,6 +19,7 @@ const CreateSchedule = () => {
         class_subjects: [],
         assignment: [],
     });
+    const [scheduleRoomSelect, setScheduleRoomSelect] = useState(null);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -32,474 +34,6 @@ const CreateSchedule = () => {
             } catch (error) {}
         };
         fetchData();
-
-        const fetch = async () => {
-            try {
-                const res = await httpRequest.post(
-                    '/schedule',
-                    {
-                        rooms: [
-                            {
-                                id: 1,
-                                code: 'LAB-01',
-                                type_room: 1,
-                                quantity: 30,
-                            },
-                            {
-                                id: 2,
-                                code: 'LAB-02',
-                                type_room: 1,
-                                quantity: 30,
-                            },
-                            {
-                                id: 3,
-                                code: 'LAB-03',
-                                type_room: 1,
-                                quantity: 30,
-                            },
-                            {
-                                id: 7,
-                                code: 'LT-01',
-                                type_room: 2,
-                                quantity: 30,
-                            },
-                            {
-                                id: 8,
-                                code: 'LT-02',
-                                type_room: 2,
-                                quantity: 30,
-                            },
-                            {
-                                id: 9,
-                                code: 'LT-03',
-                                type_room: 2,
-                                quantity: 30,
-                            },
-                            {
-                                id: 28,
-                                code: 'LT-101',
-                                type_room: 2,
-                                quantity: 90,
-                            },
-                            {
-                                id: 29,
-                                code: 'LT-102',
-                                type_room: 2,
-                                quantity: 90,
-                            },
-                            {
-                                id: 30,
-                                code: 'LT-103',
-                                type_room: 2,
-                                quantity: 90,
-                            },
-                        ],
-                        teachers: [
-                            {
-                                id: 1,
-                                busy: [
-                                    { ca: 's', thu: 4 },
-                                    { ca: 'c', thu: 4 },
-                                ],
-                            },
-                            {
-                                id: 2,
-                                busy: null,
-                            },
-                            {
-                                id: 3,
-                                busy: [{ ca: 's', thu: 3 }],
-                            },
-                            {
-                                id: 13,
-                                busy: null,
-                            },
-                            {
-                                id: 5,
-                                busy: null,
-                            },
-                            {
-                                id: 6,
-                                busy: null,
-                            },
-                            {
-                                id: 8,
-                                busy: null,
-                            },
-                            {
-                                id: 9,
-                                busy: null,
-                            },
-                        ],
-                        subjects: [
-                            {
-                                id: 1,
-                                code: '31626',
-                                credits: 2,
-                                group: 1,
-                            },
-                            {
-                                id: 2,
-                                code: '78197',
-                                credits: 2,
-                                group: 1,
-                            },
-                            {
-                                id: 3,
-                                code: '52737',
-                                credits: 3,
-                                group: 1,
-                            },
-                            {
-                                id: 4,
-                                code: '68836',
-                                credits: 4,
-                                group: 1,
-                            },
-                            {
-                                id: 13,
-                                code: '87017',
-                                credits: 2,
-                                group: 3,
-                            },
-                            {
-                                id: 14,
-                                code: '21547',
-                                credits: 2,
-                                group: 3,
-                            },
-                            {
-                                id: 15,
-                                code: '63520',
-                                credits: 4,
-                                group: 3,
-                            },
-                            {
-                                id: 16,
-                                code: '60653',
-                                credits: 3,
-                                group: 3,
-                            },
-                            {
-                                id: 17,
-                                code: '64009',
-                                credits: 3,
-                                group: 3,
-                            },
-                            {
-                                id: 18,
-                                code: '59896',
-                                credits: 4,
-                                group: 3,
-                            },
-                            {
-                                id: 25,
-                                code: '42195',
-                                credits: 3,
-                                group: 5,
-                            },
-                            {
-                                id: 26,
-                                code: '69826',
-                                credits: 3,
-                                group: 5,
-                            },
-                            {
-                                id: 27,
-                                code: '69733',
-                                credits: 2,
-                                group: 5,
-                            },
-                            {
-                                id: 28,
-                                code: '62902',
-                                credits: 3,
-                                group: 5,
-                            },
-                            {
-                                id: 29,
-                                code: '53863',
-                                credits: 3,
-                                group: 5,
-                            },
-                            {
-                                id: 30,
-                                code: '36067',
-                                credits: 3,
-                                group: 5,
-                            },
-                            {
-                                id: 31,
-                                code: '32644',
-                                credits: 3,
-                                group: 5,
-                            },
-                            {
-                                id: 40,
-                                code: '22706',
-                                credits: 2,
-                                group: 7,
-                            },
-                            {
-                                id: 41,
-                                code: '96352',
-                                credits: 3,
-                                group: 7,
-                            },
-                            {
-                                id: 42,
-                                code: '26496',
-                                credits: 3,
-                                group: 7,
-                            },
-                            {
-                                id: 43,
-                                code: '88553',
-                                credits: 3,
-                                group: 7,
-                            },
-                            {
-                                id: 44,
-                                code: '87943',
-                                credits: 3,
-                                group: 7,
-                            },
-                            {
-                                id: 45,
-                                code: '93005',
-                                credits: 2,
-                                group: 7,
-                            },
-                            {
-                                id: 46,
-                                code: '43960',
-                                credits: 3,
-                                group: 7,
-                            },
-                            {
-                                id: 47,
-                                code: '41166',
-                                credits: 2,
-                                group: 7,
-                            },
-                        ],
-                        class_subjects: [
-                            {
-                                id: 1,
-                                subject_id: 1,
-                            },
-                            {
-                                id: 2,
-                                subject_id: 2,
-                            },
-                            {
-                                id: 3,
-                                subject_id: 3,
-                            },
-                            {
-                                id: 4,
-                                subject_id: 4,
-                            },
-                            {
-                                id: 13,
-                                subject_id: 13,
-                            },
-                            {
-                                id: 14,
-                                subject_id: 14,
-                            },
-                            {
-                                id: 15,
-                                subject_id: 15,
-                            },
-                            {
-                                id: 16,
-                                subject_id: 16,
-                            },
-                            {
-                                id: 17,
-                                subject_id: 17,
-                            },
-                            {
-                                id: 18,
-                                subject_id: 18,
-                            },
-                            {
-                                id: 26,
-                                subject_id: 25,
-                            },
-                            {
-                                id: 27,
-                                subject_id: 26,
-                            },
-                            {
-                                id: 28,
-                                subject_id: 27,
-                            },
-                            {
-                                id: 29,
-                                subject_id: 28,
-                            },
-                            {
-                                id: 30,
-                                subject_id: 29,
-                            },
-                            {
-                                id: 31,
-                                subject_id: 30,
-                            },
-                            {
-                                id: 32,
-                                subject_id: 31,
-                            },
-                            {
-                                id: 42,
-                                subject_id: 40,
-                            },
-                            {
-                                id: 43,
-                                subject_id: 41,
-                            },
-                            {
-                                id: 44,
-                                subject_id: 42,
-                            },
-                            {
-                                id: 45,
-                                subject_id: 43,
-                            },
-                            {
-                                id: 46,
-                                subject_id: 44,
-                            },
-                            {
-                                id: 47,
-                                subject_id: 45,
-                            },
-                            {
-                                id: 48,
-                                subject_id: 46,
-                            },
-                            {
-                                id: 49,
-                                subject_id: 47,
-                            },
-                        ],
-                        assignment: [
-                            {
-                                class_subject_id: 1,
-                                teacher_id: 1,
-                            },
-                            {
-                                class_subject_id: 2,
-                                teacher_id: 1,
-                            },
-                            {
-                                class_subject_id: 3,
-                                teacher_id: 2,
-                            },
-                            {
-                                class_subject_id: 4,
-                                teacher_id: 3,
-                            },
-                            {
-                                class_subject_id: 13,
-                                teacher_id: 13,
-                            },
-                            {
-                                class_subject_id: 14,
-                                teacher_id: 8,
-                            },
-                            {
-                                class_subject_id: 15,
-                                teacher_id: 2,
-                            },
-                            {
-                                class_subject_id: 16,
-                                teacher_id: 1,
-                            },
-                            {
-                                class_subject_id: 17,
-                                teacher_id: 9,
-                            },
-                            {
-                                class_subject_id: 18,
-                                teacher_id: 2,
-                            },
-                            {
-                                class_subject_id: 26,
-                                teacher_id: 6,
-                            },
-                            {
-                                class_subject_id: 27,
-                                teacher_id: 9,
-                            },
-                            {
-                                class_subject_id: 28,
-                                teacher_id: 1,
-                            },
-                            {
-                                class_subject_id: 29,
-                                teacher_id: 2,
-                            },
-                            {
-                                class_subject_id: 30,
-                                teacher_id: 8,
-                            },
-                            {
-                                class_subject_id: 31,
-                                teacher_id: 1,
-                            },
-                            {
-                                class_subject_id: 32,
-                                teacher_id: 9,
-                            },
-                            {
-                                class_subject_id: 42,
-                                teacher_id: 3,
-                            },
-                            {
-                                class_subject_id: 43,
-                                teacher_id: 1,
-                            },
-                            {
-                                class_subject_id: 44,
-                                teacher_id: 13,
-                            },
-                            {
-                                class_subject_id: 45,
-                                teacher_id: 5,
-                            },
-                            {
-                                class_subject_id: 46,
-                                teacher_id: 5,
-                            },
-                            {
-                                class_subject_id: 47,
-                                teacher_id: 6,
-                            },
-                            {
-                                class_subject_id: 48,
-                                teacher_id: 8,
-                            },
-                            {
-                                class_subject_id: 49,
-                                teacher_id: 1,
-                            },
-                        ],
-                    },
-                    {
-                        headers: {
-                            Authorization: `Bearer ${storage.get(process.env.REACT_APP_TOKEN)}`,
-                        },
-                    },
-                );
-
-                setSchedule(res.data);
-            } catch (error) {}
-        };
-
-        fetch();
     }, []);
 
     const handleCreateSchedule = () => {
@@ -517,24 +51,65 @@ const CreateSchedule = () => {
                     },
                 );
 
-                if (res.success === 'success') setSchedule(res.data);
+                setSchedule(res.data);
+                setScheduleRoomSelect(0);
             } catch (error) {}
         };
         fetchCreateSchedule();
     };
 
     const handleSubmitSchedule = () => {
+        const alert = toast.loading('Đang xử lý...');
         const list = [];
         for (let arr = 0; arr < schedule.length; arr++) {
             for (let row = 0; row < 2; row++) {
                 for (let column = 0; column < 6; column++) {
-                    if (schedule[arr][row][column] != null) {
-                        list.push(schedule[arr][row][column]);
+                    if (schedule[arr].data[row][column] != null) {
+                        list.push(schedule[arr].data[row][column]);
                     }
                 }
             }
         }
-        console.log(list);
+
+        const fetchSaveSchedule = async () => {
+            try {
+                const res = await httpRequest.post(
+                    '/schedule-save',
+                    {
+                        data: list,
+                    },
+                    {
+                        headers: {
+                            Authorization: `Bearer ${storage.get(process.env.REACT_APP_TOKEN)}`,
+                        },
+                    },
+                );
+
+                if (res.success === 'success')
+                    toast.update(alert, {
+                        render: 'Thành công',
+                        type: 'success',
+                        isLoading: false,
+                        autoClose: 5000,
+                        closeButton: true,
+                        closeOnClick: true,
+                        draggable: true,
+                    });
+                setSchedule([]);
+            } catch (error) {
+                toast.update(alert, {
+                    render: 'Thất bại',
+                    type: 'error',
+                    isLoading: false,
+                    autoClose: 5000,
+                    closeButton: true,
+                    closeOnClick: true,
+                    draggable: true,
+                });
+                setSchedule([]);
+            }
+        };
+        fetchSaveSchedule();
     };
 
     return (
@@ -593,7 +168,12 @@ const CreateSchedule = () => {
                                                 </div>
                                                 <ul className="create-schedule__body__content__group__input">
                                                     <li>
-                                                        <span>Danh sách phòng học</span>
+                                                        <span>
+                                                            Danh sách phòng học{' '}
+                                                            {requestData.rooms.length > 0 && (
+                                                                <b style={{ color: 'var(--color-primary)' }}>Đã nhập</b>
+                                                            )}
+                                                        </span>
                                                         <div>
                                                             <div>
                                                                 <InputCustom
@@ -630,7 +210,12 @@ const CreateSchedule = () => {
                                                         </div>
                                                     </li>
                                                     <li>
-                                                        <span>Danh sách giáo viên</span>
+                                                        <span>
+                                                            Danh sách giáo viên{` `}
+                                                            {requestData.teachers.length > 0 && (
+                                                                <b style={{ color: 'var(--color-primary)' }}>Đã nhập</b>
+                                                            )}
+                                                        </span>
                                                         <div>
                                                             <div>
                                                                 <InputCustom
@@ -672,7 +257,12 @@ const CreateSchedule = () => {
                                                         </div>
                                                     </li>
                                                     <li>
-                                                        <span>Danh sách môn học/học phần</span>
+                                                        <span>
+                                                            Danh sách môn học/học phần{' '}
+                                                            {requestData.subjects.length > 0 && (
+                                                                <b style={{ color: 'var(--color-primary)' }}>Đã nhập</b>
+                                                            )}
+                                                        </span>
                                                         <div>
                                                             <div>
                                                                 <InputCustom
@@ -717,7 +307,12 @@ const CreateSchedule = () => {
                                                         </div>
                                                     </li>
                                                     <li>
-                                                        <span>Danh sách phân công</span>
+                                                        <span>
+                                                            Danh sách phân công{' '}
+                                                            {requestData.assignment.length > 0 && (
+                                                                <b style={{ color: 'var(--color-primary)' }}>Đã nhập</b>
+                                                            )}
+                                                        </span>
                                                         <div>
                                                             <div>
                                                                 <InputCustom
@@ -831,137 +426,156 @@ const CreateSchedule = () => {
                                     </div>
                                 </CardContent>
                             </Card>
-                            <Card>
-                                <CardHeader>
-                                    <h2>Kết quả lập thời khoá biểu</h2>
-                                </CardHeader>
-                                <CardContent className="grid-1">
-                                    <div className="create-schedule__body__content">
-                                        <div className="create-schedule__body__content__schedule">
-                                            <div className="create-schedule__body__content__schedule__head">
-                                                <div className="create-schedule__body__content__schedule__head__left">
+                            {schedule.length > 0 && (
+                                <Card>
+                                    <CardHeader>
+                                        <h2>Kết quả lập thời khoá biểu</h2>
+                                    </CardHeader>
+                                    <CardContent className="grid-1">
+                                        <div className="create-schedule__body__content">
+                                            <div className="create-schedule__body__content__schedule">
+                                                <div className="create-schedule__body__content__schedule__head">
+                                                    <div className="create-schedule__body__content__schedule__head__left">
+                                                        <div>
+                                                            <i className="bx bx-chevron-left"></i>
+                                                            <span>Trở về</span>
+                                                        </div>
+                                                        <div>
+                                                            <span>Tiếp</span>
+                                                            <i className="bx bx-chevron-right"></i>
+                                                        </div>
+                                                    </div>
+                                                    <div className="create-schedule__body__content__schedule__head__right">
+                                                        <div onClick={handleSubmitSchedule}>
+                                                            <span>Xác nhận</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div className="create-schedule__body__content__schedule__body">
                                                     <div>
-                                                        <i className="bx bx-chevron-left"></i>
-                                                        <span>Trở về</span>
-                                                    </div>
-                                                    <div>
-                                                        <span>Tiếp</span>
-                                                        <i className="bx bx-chevron-right"></i>
-                                                    </div>
-                                                </div>
-                                                <div className="create-schedule__body__content__schedule__head__right">
-                                                    <div onClick={handleSubmitSchedule}>
-                                                        <span>Xác nhận</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="create-schedule__body__content__schedule__body">
-                                                <div>
-                                                    <span>Chọn phòng:&#160;&#160;</span>
-                                                    <select name="" id="" className="home-main__body__more__select">
-                                                        <option defaultValue="1" defaultChecked>
-                                                            A01 - Phòng lab
-                                                        </option>
-                                                    </select>
-                                                </div>
-                                                <div className="create-schedule__body__content__schedule__body__table">
-                                                    <Table>
-                                                        <THead>
-                                                            <Tr>
-                                                                <TH>A01</TH>
-                                                                <TH>
-                                                                    Thứ 2 <br />
-                                                                    21/01/2022
-                                                                </TH>
-                                                                <TH>
-                                                                    Thứ 3<br />
-                                                                    21/01/2022
-                                                                </TH>
-                                                                <TH>
-                                                                    Thứ 4<br />
-                                                                    21/01/2022
-                                                                </TH>
-                                                                <TH>
-                                                                    Thứ 5<br />
-                                                                    21/01/2022
-                                                                </TH>
-                                                                <TH>
-                                                                    Thứ 6<br />
-                                                                    21/01/2022
-                                                                </TH>
-                                                                <TH>
-                                                                    Thứ 7<br />
-                                                                    21/01/2022
-                                                                </TH>
-                                                                <TH>
-                                                                    Chủ nhật
-                                                                    <br />
-                                                                    21/01/2022
-                                                                </TH>
-                                                            </Tr>
-                                                        </THead>
-                                                        <TBody>
+                                                        <span>Chọn phòng:&#160;&#160;</span>
+                                                        <select
+                                                            name=""
+                                                            id=""
+                                                            className="home-main__body__more__select"
+                                                            onChange={(event) =>
+                                                                setScheduleRoomSelect(event.target.value)
+                                                            }
+                                                        >
                                                             {schedule.length > 0 &&
-                                                                schedule[0].map((shift, index) => (
-                                                                    <Tr key={index}>
-                                                                        <TD className="center-border-table">
-                                                                            {index === 0 ? 'Ca sáng' : 'Ca chiều'}
-                                                                        </TD>
-                                                                        {shift.length > 0 &&
-                                                                            shift.map((lich, index2) => (
-                                                                                <TD key={index2} className="test">
-                                                                                    {lich ? (
-                                                                                        <div className="schedule-week__body__content__body__table__tag">
-                                                                                            <p>
-                                                                                                <b>
-                                                                                                    {lich.subject_name}
-                                                                                                </b>
-                                                                                            </p>
-                                                                                            <p>
-                                                                                                {
-                                                                                                    lich.class_subject_code
-                                                                                                }
-                                                                                            </p>
-                                                                                            <p>
-                                                                                                Phòng:&#160;
-                                                                                                {`${lich.room_code}: ${lich.type_room}`}
-                                                                                            </p>
-                                                                                            <p>
-                                                                                                Ngày:&#160;
-                                                                                                {lich.date}
-                                                                                            </p>
-                                                                                            <p>
-                                                                                                Tín chỉ:&#160;
-                                                                                                {lich.credits}
-                                                                                            </p>
-                                                                                            <p>
-                                                                                                GV:&#160;
-                                                                                                <span
-                                                                                                    style={{
-                                                                                                        color: 'var(--color-primary)',
-                                                                                                        fontWeight:
-                                                                                                            '600',
-                                                                                                    }}
-                                                                                                >
-                                                                                                    {lich.teacher_name}
-                                                                                                </span>
-                                                                                            </p>
-                                                                                        </div>
-                                                                                    ) : (
-                                                                                        ''
-                                                                                    )}
-                                                                                </TD>
-                                                                            ))}
-                                                                    </Tr>
+                                                                schedule.map((item, index) => (
+                                                                    <option
+                                                                        key={index}
+                                                                        value={index}
+                                                                    >{`Phòng ${item.code}`}</option>
                                                                 ))}
-                                                        </TBody>
-                                                    </Table>
+                                                        </select>
+                                                    </div>
+                                                    <div className="create-schedule__body__content__schedule__body__table">
+                                                        <Table>
+                                                            <THead>
+                                                                <Tr>
+                                                                    <TH>A01</TH>
+                                                                    <TH>
+                                                                        Thứ 2 <br />
+                                                                        21/01/2022
+                                                                    </TH>
+                                                                    <TH>
+                                                                        Thứ 3<br />
+                                                                        21/01/2022
+                                                                    </TH>
+                                                                    <TH>
+                                                                        Thứ 4<br />
+                                                                        21/01/2022
+                                                                    </TH>
+                                                                    <TH>
+                                                                        Thứ 5<br />
+                                                                        21/01/2022
+                                                                    </TH>
+                                                                    <TH>
+                                                                        Thứ 6<br />
+                                                                        21/01/2022
+                                                                    </TH>
+                                                                    <TH>
+                                                                        Thứ 7<br />
+                                                                        21/01/2022
+                                                                    </TH>
+                                                                </Tr>
+                                                            </THead>
+                                                            <TBody>
+                                                                {schedule.length > 0 &&
+                                                                    schedule[scheduleRoomSelect].data.map(
+                                                                        (shift, index) => (
+                                                                            <Tr key={index}>
+                                                                                <TD className="center-border-table">
+                                                                                    {index === 0
+                                                                                        ? 'Ca sáng'
+                                                                                        : 'Ca chiều'}
+                                                                                </TD>
+                                                                                {shift.length > 0 &&
+                                                                                    shift.map((lich, index2) => (
+                                                                                        <TD
+                                                                                            key={index2}
+                                                                                            className="test"
+                                                                                        >
+                                                                                            {lich ? (
+                                                                                                <div className="schedule-week__body__content__body__table__tag">
+                                                                                                    <p>
+                                                                                                        <b>
+                                                                                                            {
+                                                                                                                lich.subject_name
+                                                                                                            }
+                                                                                                        </b>
+                                                                                                    </p>
+                                                                                                    <p>
+                                                                                                        {
+                                                                                                            lich.class_subject_code
+                                                                                                        }
+                                                                                                    </p>
+                                                                                                    <p>
+                                                                                                        Phòng:&#160;
+                                                                                                        {`${lich.room_code}: ${lich.type_room}`}
+                                                                                                    </p>
+                                                                                                    <p>
+                                                                                                        Ngày:&#160;
+                                                                                                        {lich.date}
+                                                                                                    </p>
+                                                                                                    <p>
+                                                                                                        Tín chỉ:&#160;
+                                                                                                        {lich.credits}
+                                                                                                    </p>
+                                                                                                    <p>
+                                                                                                        GV:&#160;
+                                                                                                        <span
+                                                                                                            style={{
+                                                                                                                color: 'var(--color-primary)',
+                                                                                                                fontWeight:
+                                                                                                                    '600',
+                                                                                                            }}
+                                                                                                        >
+                                                                                                            {
+                                                                                                                lich.teacher_name
+                                                                                                            }
+                                                                                                        </span>
+                                                                                                    </p>
+                                                                                                </div>
+                                                                                            ) : (
+                                                                                                ''
+                                                                                            )}
+                                                                                        </TD>
+                                                                                    ))}
+                                                                            </Tr>
+                                                                        ),
+                                                                    )}
+                                                            </TBody>
+                                                        </Table>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </CardContent>
-                            </Card>
+                                    </CardContent>
+                                </Card>
+                            )}
                         </div>
                     </div>
                 </div>
