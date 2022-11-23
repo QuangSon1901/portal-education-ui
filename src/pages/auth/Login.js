@@ -42,6 +42,7 @@ const Login = () => {
                 <InputCustom
                     validate={true}
                     name="password"
+                    type="password"
                     label="Mật khẩu"
                     placeholder="Nhập mật khẩu"
                     error={formik.errors.password && formik.touched.password ? formik.errors.password : ''}

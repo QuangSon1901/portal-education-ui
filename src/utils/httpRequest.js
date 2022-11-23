@@ -21,4 +21,9 @@ export const put = async (path, data, options = {}) => {
     return res.data;
 };
 
+export const deleteRq = async (path, options = {}) => {
+    const res = await request.delete(path, options);
+    return res.data;
+};
+
 export default request;

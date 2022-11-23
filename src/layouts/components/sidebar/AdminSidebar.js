@@ -192,7 +192,10 @@ const AdminSidebar = () => {
                                 </NavLink>
                             </li>
                             <li>
-                                <NavLink to="/" className="sidebar-admin__body__group__list__item">
+                                <NavLink
+                                    to={config.routes.adminDashboard}
+                                    className="sidebar-admin__body__group__list__item"
+                                >
                                     <div>
                                         <i className="bx bx-calendar"></i>
                                         <h3>Xem thời khoá biểu</h3>
@@ -208,7 +211,10 @@ const AdminSidebar = () => {
                         <p>Khác</p>
                         <ul className="sidebar-admin__body__group__list">
                             <li>
-                                <NavLink to="/" className="sidebar-admin__body__group__list__item">
+                                <NavLink
+                                    to={config.routes.adminDashboard}
+                                    className="sidebar-admin__body__group__list__item"
+                                >
                                     <div>
                                         <i className="bx bx-cog"></i>
                                         <h3>Cài đặt trang web</h3>

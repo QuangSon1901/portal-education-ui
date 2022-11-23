@@ -95,6 +95,7 @@ const ModalChangePass = () => {
                             <form className="change-pass__content__form" onSubmit={formik.handleSubmit}>
                                 <InputCustom
                                     validate={true}
+                                    type="password"
                                     name="password"
                                     label="Mật khẩu cũ"
                                     placeholder="Nhập mật khẩu cũ"
@@ -107,6 +108,7 @@ const ModalChangePass = () => {
                                 />
                                 <InputCustom
                                     validate={true}
+                                    type="password"
                                     name="new_password"
                                     label="Mật khẩu mới"
                                     placeholder="Nhập mật khẩu mới"
@@ -121,6 +123,7 @@ const ModalChangePass = () => {
                                 />
                                 <InputCustom
                                     validate={true}
+                                    type="password"
                                     name="password_confirmation"
                                     label="Xác nhận mật khẩu"
                                     placeholder="Xác nhận lại mật khẩu"
