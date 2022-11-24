@@ -6,6 +6,7 @@ import Modal, { ModalContent, ModalHeader } from '~/components/Modal';
 import Table, { TBody, TD, TH, THead, Tr } from '~/components/Table';
 import * as httpRequest from '~/utils/httpRequest';
 import { storage } from '~/utils/storage';
+import * as XLSX from 'xlsx';
 
 const CreateSchedule = () => {
     const [facultySelect, setFacultySelect] = useState(0);
@@ -21,6 +22,7 @@ const CreateSchedule = () => {
     });
     const [scheduleRoomSelect, setScheduleRoomSelect] = useState(null);
 
+    console.log(requestData);
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -112,6 +114,48 @@ const CreateSchedule = () => {
         fetchSaveSchedule();
     };
 
+    const handleExcel = (event, type) => {
+        let selectedFile = event.target.files[0];
+        let fileReader = new FileReader();
+        fileReader.onload = (event) => {
+            let data = event.target.result;
+            let workbook = XLSX.read(data, {
+                type: 'binary',
+            });
+
+            workbook.SheetNames.forEach((sheet) => {
+                let rowObject = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[sheet]);
+                switch (type) {
+                    case 'rooms':
+                        setRequestData({ ...requestData, rooms: rowObject });
+                        break;
+                    case 'teachers':
+                        let newArr = [];
+                        rowObject.forEach((item) =>
+                            newArr.push({
+                                id: item.id,
+                                name: item.name,
+                                busy: item.busy === 'null' ? null : JSON.parse(item.busy),
+                            }),
+                        );
+                        setRequestData({ ...requestData, teachers: newArr });
+                        break;
+                    case 'subjects':
+                        setRequestData({ ...requestData, subjects: rowObject });
+                        break;
+                    case 'class_subjects':
+                        setRequestData({ ...requestData, class_subjects: rowObject });
+                        break;
+                    case 'assignment':
+                        setRequestData({ ...requestData, assignment: rowObject });
+                        break;
+                    default:
+                }
+            });
+        };
+        fileReader.readAsBinaryString(selectedFile);
+    };
+
     return (
         <>
             <div className="admin-list-page">
@@ -185,13 +229,20 @@ const CreateSchedule = () => {
                                                                 />
                                                             </div>
                                                             <div>
-                                                                <button
+                                                                <div
                                                                     className="btn-table-icon"
                                                                     style={{ backgroundColor: '#016F36' }}
                                                                 >
                                                                     <i className="bx bxs-file"></i>
                                                                     <span>excel</span>
-                                                                </button>
+                                                                    <input
+                                                                        type="file"
+                                                                        className="excel"
+                                                                        onChange={(event) =>
+                                                                            handleExcel(event, 'rooms')
+                                                                        }
+                                                                    />
+                                                                </div>
                                                                 <button
                                                                     className="btn-table-icon"
                                                                     style={{ backgroundColor: '#F3BA2C' }}
@@ -238,6 +289,13 @@ const CreateSchedule = () => {
                                                                 >
                                                                     <i className="bx bxs-file"></i>
                                                                     <span>excel</span>
+                                                                    <input
+                                                                        type="file"
+                                                                        className="excel"
+                                                                        onChange={(event) =>
+                                                                            handleExcel(event, 'teachers')
+                                                                        }
+                                                                    />
                                                                 </button>
                                                                 <button
                                                                     className="btn-table-icon"
@@ -288,6 +346,27 @@ const CreateSchedule = () => {
                                                                 >
                                                                     <i className="bx bxs-file"></i>
                                                                     <span>excel</span>
+                                                                    <input
+                                                                        type="file"
+                                                                        className="excel"
+                                                                        onChange={(event) =>
+                                                                            handleExcel(event, 'subjects')
+                                                                        }
+                                                                    />
+                                                                </button>
+                                                                <button
+                                                                    className="btn-table-icon"
+                                                                    style={{ backgroundColor: '#016F36' }}
+                                                                >
+                                                                    <i className="bx bxs-file"></i>
+                                                                    <span>excel</span>
+                                                                    <input
+                                                                        type="file"
+                                                                        className="excel"
+                                                                        onChange={(event) =>
+                                                                            handleExcel(event, 'class_subjects')
+                                                                        }
+                                                                    />
                                                                 </button>
                                                                 <button
                                                                     className="btn-table-icon"
@@ -338,6 +417,13 @@ const CreateSchedule = () => {
                                                                 >
                                                                     <i className="bx bxs-file"></i>
                                                                     <span>excel</span>
+                                                                    <input
+                                                                        type="file"
+                                                                        className="excel"
+                                                                        onChange={(event) =>
+                                                                            handleExcel(event, 'assignment')
+                                                                        }
+                                                                    />
                                                                 </button>
                                                                 <button
                                                                     className="btn-table-icon"
@@ -367,9 +453,13 @@ const CreateSchedule = () => {
                                                         <span>Số tiết buổi sáng</span>
                                                         <div>
                                                             <div>
-                                                                <InputCustom
+                                                                {/* <InputCustom
                                                                     typeComp="text2"
                                                                     placeholder="Nhập số tiết buổi sáng"
+                                                                /> */}
+                                                                <input
+                                                                    type="file"
+                                                                    onChange={(event) => handleExcel(event)}
                                                                 />
                                                             </div>
                                                         </div>
