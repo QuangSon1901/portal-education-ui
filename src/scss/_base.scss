@@ -143,3 +143,20 @@ html ::-webkit-scrollbar-track {
 .error {
     color: var(--color-error);
 }
+
+.sc-dkrFOg {
+    z-index: 9999;
+
+    & > section {
+        -webkit-align-self: center;
+        align-self: center;
+        border-radius: 8px !important;
+        width: unset !important;
+
+        & * {
+            font-size: 1.6rem !important;
+            box-shadow: none !important;
+            outline: none;
+        }
+    }
+}

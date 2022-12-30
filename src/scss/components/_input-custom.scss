@@ -28,6 +28,33 @@
         color: var(--txt-color);
     }
 
+    &__date-input {
+        height: max-content;
+        position: relative;
+
+        &__container > div > div > input {
+            background-color: var(--bg-main) !important;
+            width: 100% !important;
+            display: inline-flex !important;
+            min-width: 8rem !important;
+            justify-content: center !important;
+            white-space: nowrap !important;
+            border: 1px solid #ccc !important;
+            font-size: 1.6rem !important;
+            font-weight: 400 !important;
+            outline: none !important;
+            text-align: left !important;
+            padding: 1rem 1.4rem !important;
+            color: var(--txt-color) !important;
+            border-radius: 0.5rem !important;
+            min-height: 40px;
+        }
+
+        &__container > div > div > span > i {
+            font-size: 2rem;
+        }
+    }
+
     &__text-input {
         height: max-content;
         position: relative;

@@ -1,4 +1,5 @@
 import React, { forwardRef } from 'react';
+import { DatePicker } from 'react-rainbow-components';
 
 const InputCustom = forwardRef(({ typeComp = 'text', className, children, ...props }, ref) => {
     let Comp = Input;
@@ -8,6 +9,9 @@ const InputCustom = forwardRef(({ typeComp = 'text', className, children, ...pro
             break;
         case 'text2':
             Comp = Input2;
+            break;
+        case 'date':
+            Comp = DatePickerInput;
             break;
         default:
             break;
@@ -70,6 +74,25 @@ const Input2 = ({ type, value, name, placeholder = '', onChange, onBlur, classNa
                     className={`${className}`}
                     autoComplete="on"
                     {...props}
+                />
+            </div>
+        </div>
+    );
+};
+
+const DatePickerInput = ({ type, value, name, onClick, onChange, ...props }) => {
+    return (
+        <div className="input-custom">
+            <div className={`input-custom__date-input`}>
+                <DatePicker
+                    formatStyle="large"
+                    value={value}
+                    label="DatePicker Label"
+                    onChange={(value) => onChange(value)}
+                    icon={<i className="bx bx-calendar"></i>}
+                    className={`input-custom__date-input__container`}
+                    hideLabel
+                    locale="vn"
                 />
             </div>
         </div>

@@ -7,6 +7,8 @@ import Table, { TBody, TD, TH, THead, Tr } from '~/components/Table';
 import * as httpRequest from '~/utils/httpRequest';
 import { storage } from '~/utils/storage';
 import * as XLSX from 'xlsx';
+import { handleScoll } from '~/utils/scrollBody';
+import moment from 'moment/moment';
 
 const CreateSchedule = () => {
     const [facultySelect, setFacultySelect] = useState(0);
@@ -21,8 +23,10 @@ const CreateSchedule = () => {
         assignment: [],
     });
     const [scheduleRoomSelect, setScheduleRoomSelect] = useState(null);
+    const [dateInput, setDateInput] = useState(new Date());
+    const [dateOfWeek, setDateOfWeek] = useState(6);
+    const [consecutiveInput, setConsecutiveInput] = useState(0);
 
-    console.log(requestData);
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -40,11 +44,15 @@ const CreateSchedule = () => {
 
     const handleCreateSchedule = () => {
         const fetchCreateSchedule = async () => {
+            const alert = toast.loading('Đang lập thời khoá biểu...');
             try {
                 const res = await httpRequest.post(
                     '/schedule',
                     {
                         ...requestData,
+                        date: moment(dateInput).format('YYYY/MM/DD'),
+                        day_of_week: dateOfWeek,
+                        day_consecutive: consecutiveInput,
                     },
                     {
                         headers: {
@@ -55,7 +63,26 @@ const CreateSchedule = () => {
 
                 setSchedule(res.data);
                 setScheduleRoomSelect(0);
-            } catch (error) {}
+                toast.update(alert, {
+                    render: 'Thành công',
+                    type: 'success',
+                    isLoading: false,
+                    autoClose: 5000,
+                    closeButton: true,
+                    closeOnClick: true,
+                    draggable: true,
+                });
+            } catch (error) {
+                toast.update(alert, {
+                    render: 'Thất bại',
+                    type: 'error',
+                    isLoading: false,
+                    autoClose: 5000,
+                    closeButton: true,
+                    closeOnClick: true,
+                    draggable: true,
+                });
+            }
         };
         fetchCreateSchedule();
     };
@@ -450,38 +477,16 @@ const CreateSchedule = () => {
                                                 </div>
                                                 <ul className="create-schedule__body__content__group__input">
                                                     <li>
-                                                        <span>Số tiết buổi sáng</span>
-                                                        <div>
-                                                            <div>
-                                                                {/* <InputCustom
-                                                                    typeComp="text2"
-                                                                    placeholder="Nhập số tiết buổi sáng"
-                                                                /> */}
-                                                                <input
-                                                                    type="file"
-                                                                    onChange={(event) => handleExcel(event)}
-                                                                />
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <span>Số tiết buổi chiều</span>
-                                                        <div>
-                                                            <div>
-                                                                <InputCustom
-                                                                    typeComp="text2"
-                                                                    placeholder="Nhập số tiết buổi chiều"
-                                                                />
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                    <li>
                                                         <span>Số ngày trong tuần</span>
                                                         <div>
                                                             <div>
                                                                 <InputCustom
                                                                     typeComp="text2"
                                                                     placeholder="Nhập số ngày trong tuần"
+                                                                    value={dateOfWeek}
+                                                                    onChange={(event) =>
+                                                                        setDateOfWeek(event.target.value)
+                                                                    }
                                                                 />
                                                             </div>
                                                         </div>
@@ -496,6 +501,22 @@ const CreateSchedule = () => {
                                                                 <InputCustom
                                                                     typeComp="text2"
                                                                     placeholder="Nhập số ngày liền kề"
+                                                                    value={consecutiveInput}
+                                                                    onChange={(event) =>
+                                                                        setConsecutiveInput(event.target.value)
+                                                                    }
+                                                                />
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <span>Ngày bắt đầu học</span>
+                                                        <div>
+                                                            <div>
+                                                                <InputCustom
+                                                                    value={dateInput}
+                                                                    onChange={(value) => setDateInput(value)}
+                                                                    typeComp="date"
                                                                 />
                                                             </div>
                                                         </div>
@@ -517,7 +538,7 @@ const CreateSchedule = () => {
                                 </CardContent>
                             </Card>
                             {schedule.length > 0 && (
-                                <Card>
+                                <Card className="result-schedule">
                                     <CardHeader>
                                         <h2>Kết quả lập thời khoá biểu</h2>
                                     </CardHeader>
@@ -526,41 +547,35 @@ const CreateSchedule = () => {
                                             <div className="create-schedule__body__content__schedule">
                                                 <div className="create-schedule__body__content__schedule__head">
                                                     <div className="create-schedule__body__content__schedule__head__left">
-                                                        <div>
-                                                            <i className="bx bx-chevron-left"></i>
-                                                            <span>Trở về</span>
-                                                        </div>
-                                                        <div>
-                                                            <span>Tiếp</span>
-                                                            <i className="bx bx-chevron-right"></i>
+                                                        <div style={{ backgroundColor: '#fff' }}>
+                                                            <span style={{ color: 'var(--txt-color)' }}>
+                                                                Chọn phòng:&#160;&#160;
+                                                            </span>
+                                                            <select
+                                                                name=""
+                                                                id=""
+                                                                className="home-main__body__more__select"
+                                                                onChange={(event) =>
+                                                                    setScheduleRoomSelect(event.target.value)
+                                                                }
+                                                            >
+                                                                {schedule.length > 0 &&
+                                                                    schedule.map((item, index) => (
+                                                                        <option
+                                                                            key={index}
+                                                                            value={index}
+                                                                        >{`Phòng ${item.code}`}</option>
+                                                                    ))}
+                                                            </select>
                                                         </div>
                                                     </div>
                                                     <div className="create-schedule__body__content__schedule__head__right">
                                                         <div onClick={handleSubmitSchedule}>
-                                                            <span>Xác nhận</span>
+                                                            <span>Lưu xuống CSDL</span>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div className="create-schedule__body__content__schedule__body">
-                                                    <div>
-                                                        <span>Chọn phòng:&#160;&#160;</span>
-                                                        <select
-                                                            name=""
-                                                            id=""
-                                                            className="home-main__body__more__select"
-                                                            onChange={(event) =>
-                                                                setScheduleRoomSelect(event.target.value)
-                                                            }
-                                                        >
-                                                            {schedule.length > 0 &&
-                                                                schedule.map((item, index) => (
-                                                                    <option
-                                                                        key={index}
-                                                                        value={index}
-                                                                    >{`Phòng ${item.code}`}</option>
-                                                                ))}
-                                                        </select>
-                                                    </div>
                                                     <div className="create-schedule__body__content__schedule__body__table">
                                                         <Table>
                                                             <THead>
@@ -951,6 +966,20 @@ const ModalSubject = ({ active, close, facultySelect, requestData, setRequestDat
         setRequestData({ ...requestData, class_subjects: listClass, subjects: result2 });
         close();
     };
+
+    const handleClassSubjectChecked = (event) => {
+        const subject_id = event.target.dataset.subject;
+        const checkbox = subjectRef.current.querySelector(`input.subject[data-id="${subject_id}"]`);
+        const checkboxClass = subjectRef.current.querySelectorAll(`input.class-subject[data-subject="${subject_id}"]`);
+        let index = 0;
+        checkboxClass.forEach((item) => {
+            if (item.checked) {
+                index = 1;
+            }
+        });
+
+        index === 1 ? (checkbox.checked = true) : (checkbox.checked = false);
+    };
     return (
         <>
             <div className={`overlay ${active && 'active'}`} />
@@ -980,9 +1009,7 @@ const ModalSubject = ({ active, close, facultySelect, requestData, setRequestDat
                                                 <Fragment key={subject.id}>
                                                     <Tr
                                                         className="umbrella-programs__body__content__toggle umbrella-programs__body__content__tr"
-                                                        onClick={() =>
-                                                            setCollapse({ [subject.id]: !collapse[subject.id] })
-                                                        }
+                                                        onClick={() => setCollapse({ [subject.id]: true })}
                                                     >
                                                         <TD>
                                                             <input
@@ -1022,6 +1049,9 @@ const ModalSubject = ({ active, close, facultySelect, requestData, setRequestDat
                                                                         data-code={classSubject.code}
                                                                         data-credits={subject.credits}
                                                                         data-subname={subject.subject}
+                                                                        onChange={(event) =>
+                                                                            handleClassSubjectChecked(event)
+                                                                        }
                                                                     />
                                                                 </TD>
                                                                 <TD colSpan="2">{classSubject.code}</TD>
